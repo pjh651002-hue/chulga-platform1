@@ -1,0 +1,20 @@
+# 환경변수 - 절대 커밋하지 마십시오
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel
+
+# 편집기·운영체제
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# 의존성 (현재는 사용하지 않음)
+node_modules/
+
+# 데이터 내보내기 파일
+출가학교_*.json
