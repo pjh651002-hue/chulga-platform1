@@ -12,6 +12,7 @@ api/track.js          익명 퍼널 수집
 api/stats.js          운영자 집계 조회 (집계값만)
 api/_db.js            Supabase REST 호출 도우미
 supabase/schema.sql   수집용 테이블·뷰·보존기간
+docs/                 개인정보처리방침 초안 등 문서
 vercel.json           배포 설정과 보안 헤더
 robots.txt            검색엔진 수집 안내
 sitemap.xml           주소 목록
@@ -196,6 +197,10 @@ https://chulga-platform1.vercel.app/?lang=en
 만들지 않았습니다. `api/stats.js` 는 집계 뷰 두 개만 읽습니다.
 
 ### 남은 법적 절차
+
+**초안을 `docs/개인정보처리방침-초안.md` 에 써 두었습니다.** 게시 전 확인 목록과
+법무 검토가 필요한 쟁점(만 13세 이용자, 상담 질문의 국외 이전, 저장 리전)을
+함께 정리했습니다.
 
 이 설계는 개인정보를 담지 않는 것을 목표로 했지만, **수집을 켜기 전에
 개인정보처리방침에 수집 항목·목적·보존기간(180일)·처리 위탁(Supabase, Vercel)을
