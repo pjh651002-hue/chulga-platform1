@@ -91,7 +91,8 @@ p.lead{margin:0 0 22px;color:var(--soft);font-size:14px;line-height:1.75;max-wid
 .row .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .d{color:var(--soft);flex-shrink:0;font-size:12.5px}
 label.f{display:block;font-size:13.5px;color:var(--soft);margin-bottom:8px}
-input[type=text]{padding:10px 12px;border:1px solid var(--line);border-radius:2px;font-family:var(--sans);font-size:14px;width:120px}
+input[type=text],input[type=password]{padding:10px 12px;border:1px solid var(--line);border-radius:2px;font-family:var(--sans);font-size:14px;width:120px}
+input.wide{width:210px}
 textarea{width:100%;height:96px;padding:10px 12px;border:1px solid var(--line);border-radius:2px;font-family:var(--sans);font-size:14px;line-height:1.7;resize:vertical}
 .pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
 .pills button{padding:8px 14px;border:1px solid var(--line);border-radius:2px;background:#fff;color:var(--soft);font-family:var(--sans);font-size:13.5px;cursor:pointer}
@@ -268,17 +269,33 @@ footer .links span{cursor:pointer}
 <!-- 운영자 통계 -->
 <section id="v-stats" class="hidden" style="padding-top:30px">
   <h2 class="head">운영자 화면 · 이탈 지점</h2>
-  <p class="lead">아래 수치는 화면 구성을 보여주기 위한 예시이며 실제 데이터가 아닙니다. 익명 코드로 단계를 이으면 이런 그림을 얻을 수 있습니다.</p>
+  <p class="lead" id="stats-lead">아래 수치는 화면 구성을 보여주기 위한 예시이며 실제 데이터가 아닙니다. 조회 키를 넣으면 실제 집계로 바뀝니다.</p>
+  <div class="card" style="margin-bottom:20px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input type="password" class="wide" id="statskey" placeholder="조회 키" autocomplete="off">
+      <button class="btn sm" onclick="loadStats()">실제 집계 불러오기</button>
+      <button class="btn sm" onclick="renderFunnel(null)">예시로 되돌리기</button>
+    </div>
+    <div id="stats-msg" class="small" style="margin-top:10px"></div>
+  </div>
   <div class="card" id="funnel" style="margin-bottom:24px"></div>
-  <h3 class="sub">처음부터 설계해야 할 수집 항목</h3>
+  <div id="segments" style="margin-bottom:24px"></div>
+  <h3 class="sub">지금 수집하는 것</h3>
   <ul style="padding-left:18px;font-size:14px;line-height:1.9;margin:0">
-    <li>연령대·성별별 문의 수와 각 단계 전환율</li>
-    <li>선택된 지역과 기간의 분포 (수요가 없는 지역이 드러납니다)</li>
-    <li>사찰별 응답 소요 시간과 미응답 건수</li>
-    <li>이탈이 집중되는 단계와 그 직전 화면</li>
-    <li>출가학교 참가자 중 행자 등록으로 이어진 비율</li>
+    <li>단계별 사람 수와 이탈 지점</li>
+    <li>연령대·지역 분포 (수요가 없는 지역이 드러납니다)</li>
+    <li>관심이 모인 사찰</li>
+    <li>사찰 홈페이지 신청 클릭과 전화 걸기 — 지금 구조에서 실제 행동에 가장 가까운 지표입니다</li>
   </ul>
-  <p class="small" style="margin-top:18px">개인을 식별하지 않는 집계값만 보관하고, 원자료 보존기간과 접근권한은 사전에 정해야 합니다.</p>
+  <h3 class="sub" style="margin-top:26px">아직 셀 수 없는 것</h3>
+  <ul style="padding-left:18px;font-size:14px;line-height:1.9;margin:0">
+    <li>사찰별 응답 소요 시간과 미응답 건수 — 사찰 전송 기능이 있어야 셉니다</li>
+    <li>출가학교 참가자 중 행자 등록으로 이어진 비율 — 앱 밖에서 일어나는 일입니다</li>
+  </ul>
+  <p class="small" style="margin-top:18px">
+    이름·연락처·조회 코드·상담 질문 내용·IP·정확한 나이는 받지 않습니다. 세션 키는 브라우저 탭을
+    닫으면 사라지므로 방문과 방문 사이가 이어지지 않으며, 쿠키는 쓰지 않습니다. 기록은 180일 뒤 지워집니다.
+    사람 수가 5명 미만인 구간은 재식별을 막기 위해 감춥니다.</p>
 
   <h3 class="sub" style="margin-top:34px">참고할 만한 실제 수치</h3>
   <div class="card">
@@ -456,11 +473,55 @@ let state={view:"home",lang:"ko",sex:"",dur:"",region:"",edu:"",debt:"",filter:"
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const $=id=>document.getElementById(id);
 
+/* ─────────────────────────────────────────────
+   익명 퍼널 수집
+   보내는 것: 이벤트 이름, 탭 단위 임의 키, 연령대, 성별, 지역, 기간, 사찰명, 언어
+   보내지 않는 것: 이름, 연락처, 조회 코드, 상담 질문 내용, 정확한 나이
+   세션 키는 sessionStorage 에만 두므로 탭을 닫으면 사라지고
+   방문과 방문 사이가 이어지지 않습니다. 쿠키는 쓰지 않습니다.
+   서버가 수집을 켜지 않았으면 받기만 하고 아무것도 저장하지 않습니다.
+   ───────────────────────────────────────────── */
+const TRACK_ENDPOINT="/api/track";
+function ageBand(n){
+  if(!n||n<10)return null;
+  if(n>=60)return "60대 이상";
+  return (Math.floor(n/10)*10)+"대";
+}
+const Track={
+  key:null, on:true,
+  init(){
+    // 브라우저가 추적 거부를 켜 두었으면 수집하지 않습니다.
+    try{ if(navigator.doNotTrack==="1"||window.doNotTrack==="1"){this.on=false;return;} }catch(e){}
+    try{
+      let k=sessionStorage.getItem("chulga-sk");
+      if(!k||!/^[a-z0-9]{12,24}$/.test(k)){
+        k=(Math.random().toString(36)+Math.random().toString(36)).replace(/[^a-z0-9]/g,"").slice(0,16);
+        while(k.length<12)k+="0";
+        sessionStorage.setItem("chulga-sk",k);
+      }
+      this.key=k;
+    }catch(e){ this.on=false; }   // 저장이 막힌 환경이면 조용히 끕니다
+  },
+  send(e,extra){
+    if(!this.on||!this.key)return;
+    try{
+      const body=JSON.stringify(Object.assign({e:e,sk:this.key,l:state.lang},extra||{}));
+      if(navigator.sendBeacon){
+        navigator.sendBeacon(TRACK_ENDPOINT,new Blob([body],{type:"application/json"}));
+      }else{
+        fetch(TRACK_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:body,keepalive:true}).catch(()=>{});
+      }
+    }catch(e2){}
+  }
+};
+
 function show(v){
   state.view=v;
   ["home","story","guide","school","counsel","stats"].forEach(k=>$("v-"+k).classList.toggle("hidden",k!==v));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
   window.scrollTo({top:0,behavior:"smooth"});
+  const ev={guide:"guide_open",school:"school_open",counsel:"counsel_open"}[v];
+  if(ev)Track.send(ev);
 }
 function setLang(l){state.lang=l;renderForeign();syncLangUrl();}
 
@@ -562,7 +623,8 @@ function renderOpen(){
   ["open-home","open-school"].forEach(id=>{
     const el=$(id); if(!el)return; el.innerHTML=h;
     el.querySelectorAll(".openrow").forEach(r=>r.onclick=()=>{
-      const i=+r.dataset.i; state.sel=i; show("school"); renderMap(); renderSchools();
+      const i=+r.dataset.i; state.sel=i; Track.send("school_detail",{t:SCHOOLS[i].temple});
+      show("school"); renderMap(); renderSchools();
       setTimeout(()=>{const t=$("school-"+i); if(t)t.scrollIntoView({behavior:"smooth",block:"center"});},350);
     });
   });
@@ -587,7 +649,8 @@ function renderMap(){
     ${marks}</svg>`;
   $("map").querySelectorAll("g").forEach(g=>g.onclick=()=>{
     const i=+g.dataset.i; if(!matchFilter(SCHOOLS[i]))return;
-    state.sel=i; renderMap(); renderSchools();
+    state.sel=i; Track.send("school_detail",{t:SCHOOLS[i].temple});
+    renderMap(); renderSchools();
     const el=$("school-"+i); if(el)el.scrollIntoView({behavior:"smooth",block:"center"});
   });
 }
@@ -607,18 +670,89 @@ function schoolCard(s,i){
    </div>
    <ul>${s.points.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
    <div class="acts">
-     ${s.site?`<a class="btn sm" href="${esc(s.site)}" target="_blank" rel="noreferrer">사찰 홈페이지에서 신청</a>`:`<span class="dashed">신청 링크 확인 필요</span>`}
-     <a class="tel" href="tel:${esc(s.tel)}">종무소 ${esc(s.tel)}</a></div>
+     ${s.site?`<a class="btn sm" href="${esc(s.site)}" target="_blank" rel="noreferrer" data-tr="apply_click" data-temple="${esc(s.temple)}">사찰 홈페이지에서 신청</a>`:`<span class="dashed">신청 링크 확인 필요</span>`}
+     <a class="tel" href="tel:${esc(s.tel)}" data-tr="tel_click" data-temple="${esc(s.temple)}">종무소 ${esc(s.tel)}</a></div>
    <div class="stamp">${s.src?`근거 · ${esc(s.src)}`:"이번 확인에서 공고를 찾지 못했습니다. 사찰 확인이 필요합니다."}</div></div>`;
 }
 function renderSchools(){
   $("schools").innerHTML=SCHOOLS.map((s,i)=>matchFilter(s)?schoolCard(s,i):"").join("");
 }
-function renderFunnel(){
-  $("funnel").innerHTML=FUNNEL.map((f,i)=>`<div style="margin-bottom:14px">
+/* 퍼널 단계. 이벤트 이름은 api/track.js 의 허용 목록과 같아야 합니다. */
+const FUNNEL_STEPS=[
+ {e:"visit",       l:"앱 방문"},
+ {e:"guide_open",  l:"안내 화면 진입"},
+ {e:"match_run",   l:"조건 입력"},
+ {e:"temple_pick", l:"사찰 선택"},
+ {e:"send_click",  l:"사찰에 보내기"},
+ {e:"apply_click", l:"사찰 홈페이지 신청 클릭"},
+ {e:"tel_click",   l:"전화 걸기"}];
+/* 퍼널에 속하지 않는 경로. 따로 셉니다. */
+const SIDE_STEPS=[
+ {e:"school_open",   l:"출가학교 화면"},
+ {e:"school_detail", l:"개별 출가학교 확인"},
+ {e:"counsel_open",  l:"출가상담 화면"},
+ {e:"counsel_ask",   l:"질문 전송"}];
+
+function bars(rows,base){
+  const top=base||Math.max(1,...rows.map(r=>r.v));
+  return rows.map((f,i)=>{
+    const drop=i&&rows[i-1].v>f.v?` <span style="color:var(--warn)">−${rows[i-1].v-f.v}</span>`:"";
+    return `<div style="margin-bottom:14px">
     <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px">
-      <span>${f.l}</span><span style="color:var(--soft)">${f.v}${i?` <span style="color:var(--warn)">−${FUNNEL[i-1].v-f.v}</span>`:""}</span></div>
-    <div class="bar"><i style="width:${f.v}%;background:${i?"var(--gold)":"var(--deep)"}"></i></div></div>`).join("");
+      <span>${esc(f.l)}</span><span style="color:var(--soft)">${f.v}${drop}</span></div>
+    <div class="bar"><i style="width:${Math.round(f.v/top*100)}%;background:${i?"var(--gold)":"var(--deep)"}"></i></div></div>`;
+  }).join("");
+}
+
+function segBlock(title,list){
+  if(!list||!list.length)return "";
+  const top=Math.max(1,...list.map(x=>x.sessions));
+  return `<div class="card" style="margin-bottom:14px">
+    <h3 class="sub" style="margin-top:0">${esc(title)}</h3>
+    ${bars(list.map(x=>({l:x.value,v:x.sessions})),top)}</div>`;
+}
+
+/* d 가 null 이면 예시 수치, 아니면 /api/stats 가 준 실제 집계를 그립니다. */
+function renderFunnel(d){
+  const seg=$("segments");
+  if(!d){
+    $("funnel").innerHTML=bars(FUNNEL.map(f=>({l:f.l,v:f.v})),100);
+    if(seg)seg.innerHTML="";
+    const lead=$("stats-lead");
+    if(lead)lead.textContent="아래 수치는 화면 구성을 보여주기 위한 예시이며 실제 데이터가 아닙니다. 조회 키를 넣으면 실제 집계로 바뀝니다.";
+    return;
+  }
+  const by={};
+  (d.funnel||[]).forEach(r=>{by[r.event]=r.sessions;});
+  const main=FUNNEL_STEPS.map(x=>({l:x.l,v:by[x.e]||0}));
+  const side=SIDE_STEPS.map(x=>({l:x.l,v:by[x.e]||0}));
+  $("funnel").innerHTML=bars(main,Math.max(1,main[0].v))
+    +`<h3 class="sub" style="margin-top:26px">퍼널 밖 경로</h3>`
+    +bars(side,Math.max(1,main[0].v));
+  if(seg){
+    const g=d.segment||{};
+    seg.innerHTML=segBlock("연령대",g.age)+segBlock("희망 지역",g.region)+segBlock("관심이 모인 사찰",g.temple);
+  }
+}
+
+async function loadStats(){
+  const msg=$("stats-msg"), lead=$("stats-lead");
+  const key=$("statskey").value.trim();
+  if(!key){msg.textContent="조회 키를 넣어 주십시오.";return;}
+  msg.textContent="불러오는 중…";
+  try{
+    const r=await fetch("/api/stats?key="+encodeURIComponent(key));
+    const d=await r.json();
+    if(!d.configured){ msg.textContent="수집이 아직 설정되지 않았습니다. 아래는 예시 수치입니다."; renderFunnel(null); return; }
+    if(d.error){ msg.textContent=d.error; renderFunnel(null); return; }
+    try{ sessionStorage.setItem("chulga-statskey",key); }catch(e){}
+    renderFunnel(d);
+    if(lead)lead.textContent="실제 집계입니다. 개별 기록은 내려받을 수 없고 집계값만 나옵니다.";
+    msg.textContent=`${d.window} 기준. 사람 수가 ${d.minCell}명 미만인 구간은 재식별을 막기 위해 감춥니다.`;
+  }catch(e){
+    msg.textContent="집계를 가져오지 못했습니다. 잠시 뒤 다시 시도해 주십시오.";
+    renderFunnel(null);
+  }
 }
 
 function runMatch(){
@@ -641,6 +775,7 @@ function runMatch(){
     else{sc-=1;why.push("다음 기수 일정이 아직 공고되지 않았습니다");}
     return Object.assign({},s,{sc:sc,why:why});
   }).sort((a,b)=>b.sc-a.sc);
+  Track.send("match_run",{a:ageBand(n),s:state.sex||null,r:state.region||null,d:state.dur||null});
   state.matched={p:PATHS[key],flags:flags,list:list}; state.chosen=[]; state.code="";
   renderMatch();
 }
@@ -680,11 +815,12 @@ function renderMatch(){
   $("match-out").innerHTML=h;
   $("match-out").querySelectorAll(".pickrow").forEach(r=>r.onclick=()=>{
     const t=r.dataset.t,i=state.chosen.indexOf(t);
-    if(i>=0)state.chosen.splice(i,1);else state.chosen.push(t);
+    if(i>=0)state.chosen.splice(i,1);else{state.chosen.push(t);Track.send("temple_pick",{t:t});}
     renderMatch();
   });
   const sb=$("sendbtn");
   if(sb)sb.onclick=()=>{
+    Track.send("send_click");
     const cs="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let r="";
     for(let i=0;i<5;i++)r+=cs[Math.floor(Math.random()*cs.length)];
     state.code="출가-"+r; renderMatch();
@@ -736,6 +872,7 @@ async function ask(){
       조계종 교육부 <b>02-2011-1817</b>로 문의해 주십시오.</div>`;
     return;
   }
+  Track.send("counsel_ask");   // 질문 내용은 보내지 않습니다. 물었다는 사실만 셉니다.
   const btn=$("askbtn"); btn.disabled=true; btn.textContent="답을 찾는 중";
   out.innerHTML="";
   try{
@@ -756,7 +893,16 @@ pills("p-region","region",[{v:"수도권",l:"수도권"},{v:"충청",l:"충청"}
 pills("p-edu","edu",[{v:"yes",l:"있습니다"},{v:"no",l:"없습니다"}]);
 pills("p-debt","debt",[{v:"no",l:"없습니다"},{v:"yes",l:"있습니다"}]);
 pills("p-filter","filter",[{v:"all",l:"전체"},{v:"male",l:"남성 참여 가능"},{v:"female",l:"여성 참여 가능"}],()=>{state.sel=-1;renderMap();renderSchools();});
-renderLists(); renderVideos(); renderForeign(); renderSteps(); renderMap(); renderSchools(); renderOpen(); renderFunnel(); show("home");
+Track.init();
+/* 신청 링크·전화 버튼은 다시 그려지므로 문서에 한 번만 걸어 둡니다. */
+document.addEventListener("click",ev=>{
+  const el=ev.target&&ev.target.closest?ev.target.closest("[data-tr]"):null;
+  if(el)Track.send(el.dataset.tr,{t:el.dataset.temple||null});
+},true);
+try{ const sk=sessionStorage.getItem("chulga-statskey"); if(sk)$("statskey").value=sk; }catch(e){}
+
+renderLists(); renderVideos(); renderForeign(); renderSteps(); renderMap(); renderSchools(); renderOpen(); renderFunnel(null); show("home");
+Track.send("visit");
 
 /* 주소로 들어온 경우 — ?lang=en */
 (function fromQuery(){

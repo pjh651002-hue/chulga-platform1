@@ -54,6 +54,12 @@
   "functions": {
     "api/ask.js": {
       "maxDuration": 30
+    },
+    "api/track.js": {
+      "maxDuration": 10
+    },
+    "api/stats.js": {
+      "maxDuration": 15
     }
   }
 }
