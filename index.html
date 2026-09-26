@@ -4,6 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대한불교조계종 출가 — 길을 묻는 분께</title>
+
+<!-- ─────────────────────────────────────────────
+     검색 노출 · 링크 공유 설정
+     ▸ 배포 도메인을 바꾸면 아래 canonical / og:url / og:image 의
+       주소와 sitemap.xml 을 함께 고쳐야 합니다.
+     ▸ 지금은 시제품이므로 검색 색인을 막아 두었습니다(noindex).
+       종단 승인과 개인정보처리방침 게시가 끝나면 아래 robots 값을
+       "index, follow" 로 바꾸기만 하면 됩니다. robots.txt 는 그대로 둡니다.
+     ───────────────────────────────────────────── -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건을 한자리에서 확인하실 수 있습니다. 나이와 조건에 맞는 곳을 찾고 출가상담을 신청하십시오.">
+<link rel="canonical" href="https://chulga-platform1.vercel.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="대한불교조계종 출가 안내">
+<meta property="og:title" content="대한불교조계종 출가 — 길을 묻는 분께">
+<meta property="og:description" content="출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건을 한자리에서 확인하실 수 있습니다.">
+<meta property="og:url" content="https://chulga-platform1.vercel.app/">
+<meta property="og:image" content="https://chulga-platform1.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="대한불교조계종 출가 — 길을 묻는 분께">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="대한불교조계종 출가 — 길을 묻는 분께">
+<meta name="twitter:description" content="출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건을 한자리에서 확인하실 수 있습니다.">
+<meta name="twitter:image" content="https://chulga-platform1.vercel.app/og.png">
+
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#17313F">
+<meta name="color-scheme" content="light">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "대한불교조계종 출가 안내",
+  "url": "https://chulga-platform1.vercel.app/",
+  "inLanguage": "ko-KR",
+  "description": "출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건 안내"
+}
+</script>
 <style>
 :root{
   --bg:#FAFAF7; --card:#FFF; --ink:#1F2421; --soft:#6B726C;
@@ -414,7 +458,21 @@ function show(v){
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
   window.scrollTo({top:0,behavior:"smooth"});
 }
-function setLang(l){state.lang=l;renderForeign();}
+function setLang(l){state.lang=l;renderForeign();syncLangUrl();}
+
+/* ─────────────────────────────────────────────
+   외국인 출가 안내 딥링크
+   ?lang=en 으로 들어오면 출가안내 화면의 영문 안내가 바로 열립니다.
+   해외에서 찾아온 분께 그대로 보낼 수 있는 주소가 됩니다.
+   화면 전체가 번역된 것은 아니므로 <html lang> 은 ko 로 둡니다.
+   ───────────────────────────────────────────── */
+function syncLangUrl(){
+  try{
+    const u=new URL(location.href);
+    if(state.lang==="en") u.searchParams.set("lang","en"); else u.searchParams.delete("lang");
+    history.replaceState(null,"",u.pathname+(u.search||"")+u.hash);
+  }catch(e){}
+}
 
 function pills(el,key,opts,cb){
   $(el).innerHTML=opts.map(o=>`<button data-v="${esc(o.v)}" class="${state[key]===o.v?"on":""}">${esc(o.l)}</button>`).join("");
@@ -447,7 +505,7 @@ function renderForeign(){
   $("foreign").innerHTML=`<p style="margin:0;font-size:14.5px;line-height:1.8">${esc(F.lead)}</p>
    <ul style="margin:14px 0 0;padding-left:18px;font-size:14px;line-height:1.85">${F.items.map(t=>`<li style="margin-bottom:4px">${esc(t)}</li>`).join("")}</ul>
    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--deep)">${esc(F.contact)}</div>`;
-  pills("p-lang","lang",[{v:"ko",l:"국문"},{v:"en",l:"English"}],renderForeign);
+  pills("p-lang","lang",[{v:"ko",l:"국문"},{v:"en",l:"English"}],()=>{renderForeign();syncLangUrl();});
 }
 function renderSteps(){
   $("steps").innerHTML=STEPS.map((s,i)=>`<div class="step ${i===0?"on":""}" data-i="${i}">
@@ -695,6 +753,15 @@ pills("p-edu","edu",[{v:"yes",l:"있습니다"},{v:"no",l:"없습니다"}]);
 pills("p-debt","debt",[{v:"no",l:"없습니다"},{v:"yes",l:"있습니다"}]);
 pills("p-filter","filter",[{v:"all",l:"전체"},{v:"male",l:"남성 참여 가능"},{v:"female",l:"여성 참여 가능"}],()=>{state.sel=-1;renderMap();renderSchools();});
 renderLists(); renderVideos(); renderForeign(); renderSteps(); renderMap(); renderSchools(); renderOpen(); renderFunnel(); show("home");
+
+/* 주소로 들어온 경우 — ?lang=en */
+(function fromQuery(){
+  const q=new URLSearchParams(location.search);
+  if(q.get("lang")==="en"){
+    state.lang="en"; renderForeign(); show("guide");
+    setTimeout(()=>{const el=$("f-title"); if(el)el.scrollIntoView({behavior:"smooth",block:"start"});},420);
+  }
+})();
 </script>
 </body>
 </html>
