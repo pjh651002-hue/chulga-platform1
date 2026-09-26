@@ -86,6 +86,11 @@ as $$
   delete from public.funnel_event where occurred_at < now() - interval '180 days';
 $$;
 
+-- PostgreSQL 은 함수 EXECUTE 권한을 기본으로 PUBLIC 에 부여합니다.
+-- 그래서 anon/authenticated 에서만 회수하면 PUBLIC 경유 권한이 남아,
+-- anon 키로 /rest/v1/rpc/purge_old_funnel_events 를 호출해 수집한 기록을
+-- 통째로 지울 수 있습니다. PUBLIC 부터 회수해야 합니다.
+revoke all on function public.purge_old_funnel_events() from public;
 revoke all on function public.purge_old_funnel_events() from anon, authenticated;
 
 -- 자동 실행은 pg_cron 확장이 필요합니다. Supabase 대시보드에서

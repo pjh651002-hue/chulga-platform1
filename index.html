@@ -113,10 +113,7 @@ textarea{width:100%;height:96px;padding:10px 12px;border:1px solid var(--line);b
 .school ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;line-height:1.8}
 .school .acts{display:flex;gap:8px;margin-top:16px;align-items:center;flex-wrap:wrap}
 .dashed{font-size:13px;color:var(--soft);border:1px dashed var(--line);padding:8px 14px;border-radius:2px}
-.pickrow{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:3px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;gap:14px;align-items:flex-start}
-.pickrow.on{border-color:var(--deep);border-left-color:var(--deep)}
-.box{width:18px;height:18px;border:1px solid var(--line);border-radius:2px;flex-shrink:0;margin-top:2px;text-align:center;font-size:12px;line-height:16px;color:#fff}
-.pickrow.on .box{background:var(--deep);border-color:var(--deep)}
+.reco{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:16px;margin-bottom:10px}
 .steps div.step{border-left:2px solid var(--line);padding-left:18px;padding-bottom:20px;cursor:pointer}
 .steps div.step.on{border-left-color:var(--gold)}
 .step .hd{display:flex;align-items:baseline;gap:12px}
@@ -124,9 +121,6 @@ textarea{width:100%;height:96px;padding:10px 12px;border:1px solid var(--line);b
 .step .tt{font-size:15.5px}
 .step .body{margin:9px 0 0 38px;color:var(--soft);font-size:14px;line-height:1.8;max-width:62ch;display:none}
 .step.on .body{display:block}
-.journey{display:flex;margin-top:20px;flex-wrap:wrap}
-.journey div{flex:1 1 60px;text-align:center;padding:10px 4px;border-top:3px solid var(--line);font-size:12.5px;color:var(--soft)}
-.journey div.now{border-top-color:var(--gold);color:var(--ink)}
 .legend{display:flex;gap:16px;justify-content:center;margin-top:6px;font-size:12.5px;color:var(--soft)}
 .dot{display:inline-block;width:8px;height:8px;border-radius:8px;margin-right:6px}
 .bar{height:10px;background:var(--land);border-radius:2px}
@@ -286,11 +280,11 @@ footer .links span{cursor:pointer}
     <li>단계별 사람 수와 이탈 지점</li>
     <li>연령대·지역 분포 (수요가 없는 지역이 드러납니다)</li>
     <li>관심이 모인 사찰</li>
-    <li>사찰 홈페이지 신청 클릭과 전화 걸기 — 지금 구조에서 실제 행동에 가장 가까운 지표입니다</li>
+    <li>사찰 홈페이지 클릭과 전화 걸기 — 지금 구조에서 실제 행동에 가장 가까운 지표입니다</li>
   </ul>
   <h3 class="sub" style="margin-top:26px">아직 셀 수 없는 것</h3>
   <ul style="padding-left:18px;font-size:14px;line-height:1.9;margin:0">
-    <li>사찰별 응답 소요 시간과 미응답 건수 — 사찰 전송 기능이 있어야 셉니다</li>
+    <li>사찰별 응답 소요 시간과 미응답 건수 — 사찰과 협의해 수신 절차를 갖춘 뒤에야 셀 수 있습니다</li>
     <li>출가학교 참가자 중 행자 등록으로 이어진 비율 — 앱 밖에서 일어나는 일입니다</li>
   </ul>
   <p class="small" style="margin-top:18px">
@@ -338,7 +332,7 @@ footer .links span{cursor:pointer}
   <div style="opacity:.7">연관 사이트 · 대한불교조계종 · 교육원 · 연등회 · 템플스테이</div>
   <div style="margin-top:12px">대한불교조계종 서울 종로구 우정국로 55 한국불교역사문화기념관 3층 · TEL 02-2011-1817</div>
   <div style="opacity:.55;margin-top:8px;font-size:11.5px">
-    시제품 화면입니다. 매칭 결과 전송과 코드 발급은 실제로 동작하지 않습니다.
+    시제품 화면입니다. 사찰에 신청을 대신 전달하는 기능은 넣지 않았으며, 각 사찰에 직접 연락하시는 방식입니다.
     영상은 저작권자가 종단·사찰인 것만 연결하며 영상 파일을 보관하지 않습니다.
     로고·서체·사진은 종단 브랜드 자산이므로 사용 승인을 받아야 합니다.
     <div style="margin-top:6px">출가학교 자료 확인일 · 2026년 9월 8일</div>
@@ -463,14 +457,13 @@ const SCHOOLS=[
 /* 자료 확인일. 데이터를 손볼 때 이 날짜도 함께 고치십시오. */
 const DATA_DATE="2026-09-26";
 
-const JOURNEY=["관심","상담","출가학교","행자","교육"];
 const FUNNEL=[{l:"앱 방문",v:100},{l:"조건 입력",v:62},{l:"사찰에 전송",v:31},{l:"상담 응답",v:24},{l:"출가학교 참가",v:9},{l:"행자 등록",v:2}];
 const RISK=["죽고","죽을","자살","사라지고","없어지고 싶","살기 싫","끝내고 싶"];
 
 const COAST=[[126.4,37.8],[126.2,37.4],[126.6,37.0],[126.4,36.7],[126.2,36.6],[126.5,36.3],[126.6,35.9],[126.4,35.6],[126.3,35.0],[126.4,34.7],[126.6,34.3],[127.2,34.6],[127.5,34.3],[128.0,34.8],[128.6,34.9],[129.1,35.1],[129.4,35.6],[129.5,36.0],[129.4,36.6],[129.4,37.2],[129.1,37.6],[128.7,38.0],[128.4,38.4],[128.3,38.6],[127.4,38.3],[126.9,38.0],[126.7,37.9]];
 const PXf=lo=>(lo-125.6)*105, PYf=la=>(38.8-la)*105;
 
-let state={view:"home",lang:"ko",sex:"",dur:"",region:"",edu:"",debt:"",filter:"all",sel:-1,chosen:[],code:"",matched:null};
+let state={view:"home",lang:"ko",sex:"",dur:"",region:"",edu:"",debt:"",filter:"all",sel:-1,matched:null};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const $=id=>document.getElementById(id);
 
@@ -683,9 +676,7 @@ const FUNNEL_STEPS=[
  {e:"visit",       l:"앱 방문"},
  {e:"guide_open",  l:"안내 화면 진입"},
  {e:"match_run",   l:"조건 입력"},
- {e:"temple_pick", l:"사찰 선택"},
- {e:"send_click",  l:"사찰에 보내기"},
- {e:"apply_click", l:"사찰 홈페이지 신청 클릭"},
+ {e:"apply_click", l:"사찰 홈페이지 클릭"},
  {e:"tel_click",   l:"전화 걸기"}];
 /* 퍼널에 속하지 않는 경로. 따로 셉니다. */
 const SIDE_STEPS=[
@@ -777,7 +768,7 @@ function runMatch(){
     return Object.assign({},s,{sc:sc,why:why});
   }).sort((a,b)=>b.sc-a.sc);
   Track.send("match_run",{a:ageBand(n),s:state.sex||null,r:state.region||null,d:state.dur||null});
-  state.matched={p:PATHS[key],flags:flags,list:list}; state.chosen=[]; state.code="";
+  state.matched={p:PATHS[key],flags:flags,list:list};
   renderMatch();
 }
 function renderMatch(){
@@ -789,43 +780,28 @@ function renderMatch(){
     <ul style="margin:12px 0 0;padding-left:18px;line-height:1.8;font-size:14px">${p.notes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
     ${m.flags.length?`<div class="flag">${m.flags.map(f=>`<div>${esc(f)}</div>`).join("")}</div>`:""}</div>
    <h3 class="sub">지금 알아보실 만한 곳</h3>
-   <p class="small" style="margin:0 0 16px">조건에 가까운 순서입니다. <b style="color:var(--ink)">고르신 곳에만</b> 조건이 전달되며, 이름과 연락처는 보내지 않습니다.</p>`;
-  h+=m.list.map(s=>{
-    const on=state.chosen.indexOf(s.temple)>=0;
-    return `<div class="pickrow ${on?"on":""}" data-t="${esc(s.temple)}">
-      <div class="box">${on?"✓":""}</div>
-      <div style="flex:1">
-        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
-          <span style="font-family:var(--serif);font-size:16.5px">${esc(s.temple)}</span>
-          <span style="font-size:12.5px;color:var(--soft)">${esc(s.region)} · ${esc(s.days)}</span></div>
-        <div style="font-size:13px;color:var(--gold);margin-top:4px;font-family:var(--serif)">${esc(s.title)}</div>
-        ${s.why.length?`<div style="font-size:12.5px;color:var(--soft);margin-top:7px;line-height:1.7">${esc(s.why.join(" · "))}</div>`:""}
-      </div></div>`;}).join("");
-  h+=`<div class="card" style="margin-top:16px">`;
-  if(!state.code){
-    h+=`<div class="small" style="margin-bottom:14px">보내는 내용은 성별, 나이, 가능한 기간, 지역뿐입니다. 이후 연락은 발급받으신 코드로 이 앱 안에서만 이루어집니다.</div>
-      <button class="btn" id="sendbtn" ${state.chosen.length?"":"disabled"}>고른 ${state.chosen.length}곳에 보내기</button>`;
-  }else{
-    h+=`<div style="font-family:var(--serif);font-size:17px;color:var(--deep);margin-bottom:8px">보냈습니다</div>
-      <div style="font-size:14px;line-height:1.8">조회 코드 <b style="font-family:var(--serif);font-size:18px;letter-spacing:.06em">${esc(state.code)}</b>
-      <div class="small" style="margin-top:6px">이 코드를 적어두시면 답이 왔는지 확인하실 수 있습니다. 이름을 남기지 않으셨으므로 코드를 잃으면 조회가 어렵습니다.</div></div>
-      <div class="journey">${JOURNEY.map((j,i)=>`<div class="${i===0?"now":""}">${j}</div>`).join("")}</div>
-      <div class="small" style="margin-top:10px">시제품이므로 실제로 전송되지는 않습니다.</div>`;
-  }
-  h+=`</div>`;
+   <p class="small" style="margin:0 0 16px">조건에 가까운 순서입니다. 마음이 가시는 곳에 <b style="color:var(--ink)">직접 연락해 보십시오.</b>
+     이 화면은 어디에도 아무것도 보내지 않으며, 입력하신 내용은 기기 밖으로 나가지 않습니다.</p>`;
+  h+=m.list.map(s=>`<div class="reco">
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
+        <span style="font-family:var(--serif);font-size:16.5px">${esc(s.temple)}</span>
+        <span style="font-size:12.5px;color:var(--soft)">${esc(s.region)} · ${esc(s.days)}</span></div>
+      <div style="font-size:13px;color:var(--gold);margin-top:4px;font-family:var(--serif)">${esc(s.title)}</div>
+      ${s.why.length?`<div style="font-size:12.5px;color:var(--soft);margin-top:7px;line-height:1.7">${esc(s.why.join(" · "))}</div>`:""}
+      <div class="acts" style="margin-top:12px">
+        ${s.site?`<a class="btn sm" href="${esc(s.site)}" target="_blank" rel="noreferrer" data-tr="apply_click" data-temple="${esc(s.temple)}">사찰 홈페이지</a>`:""}
+        <a class="tel" href="tel:${esc(s.tel)}" data-tr="tel_click" data-temple="${esc(s.temple)}">종무소 ${esc(s.tel)}</a>
+        ${s.applyTel?`<a class="tel" href="tel:${esc(s.applyTel)}" data-tr="tel_click" data-temple="${esc(s.temple)}">모집문의 ${esc(s.applyTel)}</a>`:""}
+      </div></div>`).join("");
+  h+=`<div class="card" style="margin-top:16px">
+    <div style="font-family:var(--serif);font-size:16px;color:var(--deep);margin-bottom:8px">어디에 물어야 할지 모르시겠다면</div>
+    <div style="font-size:14px;line-height:1.85">출가상담전화 <b>1666-7987</b>(09:00~18:00)로 전화하시면 출가상담사 스님과 이야기하실 수 있습니다.
+      절차에 관한 것은 조계종 교육부 <b>02-2011-1817</b>로 문의하십시오.</div>
+    <div class="acts" style="margin-top:12px">
+      <a class="tel" href="tel:1666-7987" data-tr="tel_click" data-temple="출가상담전화">출가상담 1666-7987</a>
+      <a class="tel" href="tel:02-2011-1817" data-tr="tel_click" data-temple="교육부">교육부 02-2011-1817</a>
+    </div></div>`;
   $("match-out").innerHTML=h;
-  $("match-out").querySelectorAll(".pickrow").forEach(r=>r.onclick=()=>{
-    const t=r.dataset.t,i=state.chosen.indexOf(t);
-    if(i>=0)state.chosen.splice(i,1);else{state.chosen.push(t);Track.send("temple_pick",{t:t});}
-    renderMatch();
-  });
-  const sb=$("sendbtn");
-  if(sb)sb.onclick=()=>{
-    Track.send("send_click");
-    const cs="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let r="";
-    for(let i=0;i<5;i++)r+=cs[Math.floor(Math.random()*cs.length)];
-    state.code="출가-"+r; renderMatch();
-  };
 }
 
 function exportData(){

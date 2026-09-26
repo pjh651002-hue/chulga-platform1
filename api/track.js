@@ -23,11 +23,9 @@ const EVENTS = new Set([
   "visit",          // 앱 방문
   "guide_open",     // 나에게 맞는 곳 찾기 진입
   "match_run",      // 조건 입력 완료
-  "temple_pick",    // 사찰 선택
-  "send_click",     // 고른 곳에 보내기
   "school_open",    // 출가학교 화면 진입
   "school_detail",  // 특정 출가학교 상세 확인
-  "apply_click",    // 사찰 홈페이지 신청 링크 클릭
+  "apply_click",    // 사찰 홈페이지 링크 클릭
   "tel_click",      // 전화 걸기
   "counsel_open",   // 출가상담 화면 진입
   "counsel_ask",    // 질문 전송 (내용은 받지 않습니다)
