@@ -101,6 +101,11 @@ textarea{width:100%;height:96px;padding:10px 12px;border:1px solid var(--line);b
 .btn[disabled]{background:var(--line);color:var(--soft);cursor:default}
 .btn.sm{padding:9px 18px;font-size:13.5px}
 .tel{color:var(--deep);font-size:13.5px;text-decoration:none;padding:9px 6px}
+.callcard{border-left:3px solid var(--gold)}
+.callcard .clabel{font-size:13px;color:var(--soft);letter-spacing:.02em}
+.callcard .cnum{display:block;font-family:var(--serif);font-size:34px;color:var(--deep);letter-spacing:.02em;margin:6px 0 10px;text-decoration:none}
+.callcard .cnum.small-num{font-size:27px}
+.callcard .cdesc{font-size:13.5px;line-height:1.8;color:var(--ink)}
 .flag{margin-top:14px;padding:12px 14px;background:#FBF3F1;border-left:2px solid var(--warn);font-size:13.5px;line-height:1.75;color:var(--warn)}
 .note{margin-top:16px;padding:14px 16px;background:#FBF3F1;border-left:2px solid var(--warn);font-size:13px;line-height:1.8;color:var(--ink)}
 .small{font-size:12.5px;color:var(--soft);line-height:1.75}
@@ -253,12 +258,46 @@ footer .links span{cursor:pointer}
 <!-- 출가상담 -->
 <section id="v-counsel" class="hidden" style="padding-top:30px">
   <h2 class="head">출가상담</h2>
-  <p class="lead">절차와 출가학교에 관한 것을 물어보십시오. 출가를 해야 할지 말지는 여기서 답하지 않고 스님께 연결해 드립니다. 영어로 물어보셔도 됩니다.</p>
-  <textarea id="q" placeholder="예: 서른다섯 직장인인데 먼저 체험해 볼 수 있는 곳이 있습니까 / I am not Korean. Can I be ordained?"></textarea>
-  <p class="small" style="margin-top:8px;color:var(--warn)">이름·연락처·주소처럼 본인을 알 수 있는 내용은 적지 말아 주십시오. 적지 않으셔도 답변에는 지장이 없습니다.</p>
-  <button class="btn" id="askbtn" onclick="ask()" style="margin-top:10px">묻기</button>
-  <div id="answer"></div>
-  <p class="small" style="margin-top:16px">더 자세한 것은 출가상담전화 <b>1666-7987</b>(상담시간 09:00~18:00) 또는 조계종 교육부 02-2011-1817로 문의하십시오. 18시 이후 걸려온 부재중 전화는 출가상담사 스님이 직접 회신합니다.</p>
+  <p class="lead">출가상담사 스님과 전화로 이야기하실 수 있습니다. 이름을 밝히지 않으셔도 되고, 아직 마음을 정하지 않으셨어도 됩니다.</p>
+
+  <div class="card callcard">
+    <div class="clabel">출가상담전화</div>
+    <a class="cnum" href="tel:1666-7987" data-tr="tel_click" data-temple="출가상담전화">1666-7987</a>
+    <div class="cdesc">상담시간 09:00~18:00 · 출가상담사 스님이 받습니다.<br>
+      18시 이후 걸려온 부재중 전화는 스님이 직접 회신합니다.</div>
+    <a class="btn" style="margin-top:16px" href="tel:1666-7987" data-tr="tel_click" data-temple="출가상담전화">전화 걸기</a>
+  </div>
+
+  <div class="card callcard" style="margin-top:14px">
+    <div class="clabel">절차와 서류에 관한 것</div>
+    <a class="cnum small-num" href="tel:02-2011-1817" data-tr="tel_click" data-temple="교육부">02-2011-1817</a>
+    <div class="cdesc">대한불교조계종 교육부 · 평일 09:00~18:00<br>
+      행자 등록, 제출 서류, 외국인 출가 요건 같은 절차 문의를 받습니다.</div>
+    <a class="btn sm" style="margin-top:16px" href="tel:02-2011-1817" data-tr="tel_click" data-temple="교육부">전화 걸기</a>
+  </div>
+
+  <h3 class="sub" style="margin-top:34px">이런 것을 물어보셔도 됩니다</h3>
+  <ul style="padding-left:18px;font-size:14px;line-height:1.95;margin:0 0 6px">
+    <li>지금 제 나이와 사정으로 출가할 수 있는지</li>
+    <li>어느 절로 가야 하는지, 먼저 체험해 볼 곳이 있는지</li>
+    <li>행자 생활이 실제로 어떤지</li>
+    <li>가족에게 어떻게 말을 꺼내야 할지</li>
+    <li>빚이나 건강 문제가 걸림돌이 되는지</li>
+  </ul>
+  <p class="small" style="max-width:60ch">출가를 해야 할지 말지는 전화로 이야기하시는 편이 낫습니다. 사정은 저마다 달라서 글로는 다 담기 어렵습니다.</p>
+
+  <h3 class="sub" style="margin-top:34px">먼저 읽어보실 것</h3>
+  <p class="small" style="margin-bottom:12px;max-width:60ch">전화하시기 전에 대략의 절차를 보고 싶으시다면 아래 화면에 정리되어 있습니다.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn sm" onclick="show('guide')">출가안내 — 스님이 되기까지</button>
+    <button class="btn sm" onclick="show('school')">출가학교 — 먼저 살아보기</button>
+  </div>
+
+  <div class="note" style="margin-top:34px">
+    <b>마음이 많이 힘드실 때</b><br>
+    출가 절차보다 먼저 이야기 나눌 곳이 있습니다. 혼자 견디지 마시고 연락해 주십시오.<br>
+    <a class="tel" style="padding:8px 0 0;display:inline-block;font-size:15px" href="tel:109" data-tr="tel_click" data-temple="자살예방상담">자살예방 상담 109 — 24시간</a>
+  </div>
 </section>
 
 <!-- 운영자 통계 -->
@@ -335,19 +374,16 @@ footer .links span{cursor:pointer}
     시제품 화면입니다. 사찰에 신청을 대신 전달하는 기능은 넣지 않았으며, 각 사찰에 직접 연락하시는 방식입니다.
     영상은 저작권자가 종단·사찰인 것만 연결하며 영상 파일을 보관하지 않습니다.
     로고·서체·사진은 종단 브랜드 자산이므로 사용 승인을 받아야 합니다.
-    <div style="margin-top:6px">출가학교 자료 확인일 · 2026년 9월 8일</div>
+    <div style="margin-top:6px" id="foot-stamp"></div>
   </div>
 </div></footer>
 
 <script>
 /* ─────────────────────────────────────────────
-   상담 응답 서버 주소
-   비워 두면 안내 문구만 나옵니다.
-   ★ 이곳에 API 키를 직접 적으면 절대 안 됩니다.
-     키는 종단 서버에 두고, 그 서버 주소만 여기에 적으십시오.
-     서버는 {question:"..."} 를 받아 {answer:"..."} 를 돌려주면 됩니다.
+   출가상담은 전화로 안내합니다.
+   api/ask.js (응답 중계 함수)는 저장소에 남아 있지만 이 화면에서는
+   부르지 않습니다. 다시 쓰시려면 README 「7. 출가상담 화면」을 보십시오.
    ───────────────────────────────────────────── */
-const API_ENDPOINT = "/api/ask";
 
 const NAV=[{id:"story",label:"출가이야기"},{id:"guide",label:"출가안내"},{id:"school",label:"출가학교"},{id:"counsel",label:"출가상담"}];
 
@@ -454,11 +490,10 @@ const SCHOOLS=[
   site:"http://www.jogyesa.kr/",tel:"02-768-8600",applyTel:"",
   src:"종단 출가 홈페이지 언론보도 2026.02.23 · 2026.09.26 웹 확인(원문 미대조)"}];
 
-/* 자료 확인일. 데이터를 손볼 때 이 날짜도 함께 고치십시오. */
+/* 자료 확인일. 화면 곳곳의 표기는 이 값을 따라가므로 여기만 고치면 됩니다. */
 const DATA_DATE="2026-09-26";
 
 const FUNNEL=[{l:"앱 방문",v:100},{l:"조건 입력",v:62},{l:"사찰에 전송",v:31},{l:"상담 응답",v:24},{l:"출가학교 참가",v:9},{l:"행자 등록",v:2}];
-const RISK=["죽고","죽을","자살","사라지고","없어지고 싶","살기 싫","끝내고 싶"];
 
 const COAST=[[126.4,37.8],[126.2,37.4],[126.6,37.0],[126.4,36.7],[126.2,36.6],[126.5,36.3],[126.6,35.9],[126.4,35.6],[126.3,35.0],[126.4,34.7],[126.6,34.3],[127.2,34.6],[127.5,34.3],[128.0,34.8],[128.6,34.9],[129.1,35.1],[129.4,35.6],[129.5,36.0],[129.4,36.6],[129.4,37.2],[129.1,37.6],[128.7,38.0],[128.4,38.4],[128.3,38.6],[127.4,38.3],[126.9,38.0],[126.7,37.9]];
 const PXf=lo=>(lo-125.6)*105, PYf=la=>(38.8-la)*105;
@@ -682,8 +717,7 @@ const FUNNEL_STEPS=[
 const SIDE_STEPS=[
  {e:"school_open",   l:"출가학교 화면"},
  {e:"school_detail", l:"개별 출가학교 확인"},
- {e:"counsel_open",  l:"출가상담 화면"},
- {e:"counsel_ask",   l:"질문 전송"}];
+ {e:"counsel_open",  l:"출가상담 화면"}];
 
 function bars(rows,base){
   const top=base||Math.max(1,...rows.map(r=>r.v));
@@ -833,33 +867,6 @@ function applyData(){
   }
 }
 
-async function ask(){
-  const q=$("q").value.trim(); if(!q)return;
-  const out=$("answer");
-  if(RISK.some(w=>q.indexOf(w)>=0)){
-    out.innerHTML=`<div class="note" style="padding:18px">
-      <div style="color:var(--warn);font-family:var(--serif);font-size:16px;margin-bottom:8px">지금은 절차 안내보다 먼저 드릴 말씀이 있습니다</div>
-      많이 힘드신 것 같습니다. 이 창구 대신 사람과 직접 이야기하시면 좋겠습니다.
-      <div style="margin-top:10px">자살예방 상담 109 (24시간)<br>조계종 출가상담 1666-7987</div></div>`;
-    return;
-  }
-  if(!API_ENDPOINT){
-    out.innerHTML=`<div class="card" style="margin-top:18px;line-height:1.85;font-size:14.5px">
-      아직 상담 서버가 연결되지 않았습니다. 지금은 출가상담전화 <b>1666-7987</b> 또는
-      조계종 교육부 <b>02-2011-1817</b>로 문의해 주십시오.</div>`;
-    return;
-  }
-  Track.send("counsel_ask");   // 질문 내용은 보내지 않습니다. 물었다는 사실만 셉니다.
-  const btn=$("askbtn"); btn.disabled=true; btn.textContent="답을 찾는 중";
-  out.innerHTML="";
-  try{
-    const res=await fetch(API_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q})});
-    const data=await res.json();
-    out.innerHTML=`<div class="card" style="margin-top:18px;line-height:1.85;font-size:14.5px;white-space:pre-wrap">${esc(data.answer||"")}</div>`;
-  }catch(e){
-    out.innerHTML=`<div class="card" style="margin-top:18px;line-height:1.85;font-size:14.5px">응답을 가져오지 못했습니다. 출가상담전화 1666-7987로 문의해 주십시오.</div>`;
-  }finally{ btn.disabled=false; btn.textContent="묻기"; }
-}
 
 /* 초기화 */
 $("nav").innerHTML=NAV.map(n=>`<button data-v="${n.id}">${n.label}</button>`).join("");
@@ -878,6 +885,10 @@ document.addEventListener("click",ev=>{
 },true);
 try{ const sk=sessionStorage.getItem("chulga-statskey"); if(sk)$("statskey").value=sk; }catch(e){}
 
+(function footStamp(){
+  const d=DATA_DATE.split("-");
+  $("foot-stamp").textContent=`출가학교 자료 확인일 · ${+d[0]}년 ${+d[1]}월 ${+d[2]}일`;
+})();
 renderLists(); renderVideos(); renderForeign(); renderSteps(); renderMap(); renderSchools(); renderOpen(); renderFunnel(null); show("home");
 Track.send("visit");
 

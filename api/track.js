@@ -28,7 +28,6 @@ const EVENTS = new Set([
   "apply_click",    // 사찰 홈페이지 링크 클릭
   "tel_click",      // 전화 걸기
   "counsel_open",   // 출가상담 화면 진입
-  "counsel_ask",    // 질문 전송 (내용은 받지 않습니다)
 ]);
 
 const AGE_BANDS = new Set(["10대", "20대", "30대", "40대", "50대", "60대 이상"]);
