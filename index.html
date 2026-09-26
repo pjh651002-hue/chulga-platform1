@@ -4,6 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대한불교조계종 출가 — 길을 묻는 분께</title>
+
+<!-- ─────────────────────────────────────────────
+     검색 노출 · 링크 공유 설정
+     ▸ 배포 도메인을 바꾸면 아래 canonical / og:url / og:image 의
+       주소와 sitemap.xml 을 함께 고쳐야 합니다.
+     ▸ 검색 색인을 켜 두었습니다(2026.09.26).
+       다시 내리시려면 아래 robots 값을 "noindex, nofollow" 로 바꾸십시오.
+       robots.txt 는 어느 쪽이든 그대로 둡니다.
+     ───────────────────────────────────────────── -->
+<meta name="robots" content="index, follow">
+<meta name="description" content="출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건을 한자리에서 확인하실 수 있습니다. 나이와 조건에 맞는 곳을 찾고 출가상담을 신청하십시오.">
+<link rel="canonical" href="https://chulga-platform1.vercel.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="대한불교조계종 출가 안내">
+<meta property="og:title" content="대한불교조계종 출가 — 길을 묻는 분께">
+<meta property="og:description" content="출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건을 한자리에서 확인하실 수 있습니다.">
+<meta property="og:url" content="https://chulga-platform1.vercel.app/">
+<meta property="og:image" content="https://chulga-platform1.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="대한불교조계종 출가 — 길을 묻는 분께">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="대한불교조계종 출가 — 길을 묻는 분께">
+<meta name="twitter:description" content="출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건을 한자리에서 확인하실 수 있습니다.">
+<meta name="twitter:image" content="https://chulga-platform1.vercel.app/og.png">
+
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#17313F">
+<meta name="color-scheme" content="light">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "대한불교조계종 출가 안내",
+  "url": "https://chulga-platform1.vercel.app/",
+  "inLanguage": "ko-KR",
+  "description": "출가 절차와 자격 요건, 전국 출가학교 모집 일정, 외국인 출가 요건 안내"
+}
+</script>
 <style>
 :root{
   --bg:#FAFAF7; --card:#FFF; --ink:#1F2421; --soft:#6B726C;
@@ -47,7 +91,8 @@ p.lead{margin:0 0 22px;color:var(--soft);font-size:14px;line-height:1.75;max-wid
 .row .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .d{color:var(--soft);flex-shrink:0;font-size:12.5px}
 label.f{display:block;font-size:13.5px;color:var(--soft);margin-bottom:8px}
-input[type=text]{padding:10px 12px;border:1px solid var(--line);border-radius:2px;font-family:var(--sans);font-size:14px;width:120px}
+input[type=text],input[type=password]{padding:10px 12px;border:1px solid var(--line);border-radius:2px;font-family:var(--sans);font-size:14px;width:120px}
+input.wide{width:210px}
 textarea{width:100%;height:96px;padding:10px 12px;border:1px solid var(--line);border-radius:2px;font-family:var(--sans);font-size:14px;line-height:1.7;resize:vertical}
 .pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
 .pills button{padding:8px 14px;border:1px solid var(--line);border-radius:2px;background:#fff;color:var(--soft);font-family:var(--sans);font-size:13.5px;cursor:pointer}
@@ -68,10 +113,7 @@ textarea{width:100%;height:96px;padding:10px 12px;border:1px solid var(--line);b
 .school ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;line-height:1.8}
 .school .acts{display:flex;gap:8px;margin-top:16px;align-items:center;flex-wrap:wrap}
 .dashed{font-size:13px;color:var(--soft);border:1px dashed var(--line);padding:8px 14px;border-radius:2px}
-.pickrow{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:3px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;gap:14px;align-items:flex-start}
-.pickrow.on{border-color:var(--deep);border-left-color:var(--deep)}
-.box{width:18px;height:18px;border:1px solid var(--line);border-radius:2px;flex-shrink:0;margin-top:2px;text-align:center;font-size:12px;line-height:16px;color:#fff}
-.pickrow.on .box{background:var(--deep);border-color:var(--deep)}
+.reco{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:16px;margin-bottom:10px}
 .steps div.step{border-left:2px solid var(--line);padding-left:18px;padding-bottom:20px;cursor:pointer}
 .steps div.step.on{border-left-color:var(--gold)}
 .step .hd{display:flex;align-items:baseline;gap:12px}
@@ -79,9 +121,6 @@ textarea{width:100%;height:96px;padding:10px 12px;border:1px solid var(--line);b
 .step .tt{font-size:15.5px}
 .step .body{margin:9px 0 0 38px;color:var(--soft);font-size:14px;line-height:1.8;max-width:62ch;display:none}
 .step.on .body{display:block}
-.journey{display:flex;margin-top:20px;flex-wrap:wrap}
-.journey div{flex:1 1 60px;text-align:center;padding:10px 4px;border-top:3px solid var(--line);font-size:12.5px;color:var(--soft)}
-.journey div.now{border-top-color:var(--gold);color:var(--ink)}
 .legend{display:flex;gap:16px;justify-content:center;margin-top:6px;font-size:12.5px;color:var(--soft)}
 .dot{display:inline-block;width:8px;height:8px;border-radius:8px;margin-right:6px}
 .bar{height:10px;background:var(--land);border-radius:2px}
@@ -216,25 +255,42 @@ footer .links span{cursor:pointer}
   <h2 class="head">출가상담</h2>
   <p class="lead">절차와 출가학교에 관한 것을 물어보십시오. 출가를 해야 할지 말지는 여기서 답하지 않고 스님께 연결해 드립니다. 영어로 물어보셔도 됩니다.</p>
   <textarea id="q" placeholder="예: 서른다섯 직장인인데 먼저 체험해 볼 수 있는 곳이 있습니까 / I am not Korean. Can I be ordained?"></textarea>
+  <p class="small" style="margin-top:8px;color:var(--warn)">이름·연락처·주소처럼 본인을 알 수 있는 내용은 적지 말아 주십시오. 적지 않으셔도 답변에는 지장이 없습니다.</p>
   <button class="btn" id="askbtn" onclick="ask()" style="margin-top:10px">묻기</button>
   <div id="answer"></div>
-  <p class="small" style="margin-top:16px">더 자세한 것은 출가상담전화 1666-7987 또는 조계종 교육부 02-2011-1817로 문의하십시오.</p>
+  <p class="small" style="margin-top:16px">더 자세한 것은 출가상담전화 <b>1666-7987</b>(상담시간 09:00~18:00) 또는 조계종 교육부 02-2011-1817로 문의하십시오. 18시 이후 걸려온 부재중 전화는 출가상담사 스님이 직접 회신합니다.</p>
 </section>
 
 <!-- 운영자 통계 -->
 <section id="v-stats" class="hidden" style="padding-top:30px">
   <h2 class="head">운영자 화면 · 이탈 지점</h2>
-  <p class="lead">아래 수치는 화면 구성을 보여주기 위한 예시이며 실제 데이터가 아닙니다. 익명 코드로 단계를 이으면 이런 그림을 얻을 수 있습니다.</p>
+  <p class="lead" id="stats-lead">아래 수치는 화면 구성을 보여주기 위한 예시이며 실제 데이터가 아닙니다. 조회 키를 넣으면 실제 집계로 바뀝니다.</p>
+  <div class="card" style="margin-bottom:20px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input type="password" class="wide" id="statskey" placeholder="조회 키" autocomplete="off">
+      <button class="btn sm" onclick="loadStats()">실제 집계 불러오기</button>
+      <button class="btn sm" onclick="renderFunnel(null)">예시로 되돌리기</button>
+    </div>
+    <div id="stats-msg" class="small" style="margin-top:10px"></div>
+  </div>
   <div class="card" id="funnel" style="margin-bottom:24px"></div>
-  <h3 class="sub">처음부터 설계해야 할 수집 항목</h3>
+  <div id="segments" style="margin-bottom:24px"></div>
+  <h3 class="sub">지금 수집하는 것</h3>
   <ul style="padding-left:18px;font-size:14px;line-height:1.9;margin:0">
-    <li>연령대·성별별 문의 수와 각 단계 전환율</li>
-    <li>선택된 지역과 기간의 분포 (수요가 없는 지역이 드러납니다)</li>
-    <li>사찰별 응답 소요 시간과 미응답 건수</li>
-    <li>이탈이 집중되는 단계와 그 직전 화면</li>
-    <li>출가학교 참가자 중 행자 등록으로 이어진 비율</li>
+    <li>단계별 사람 수와 이탈 지점</li>
+    <li>연령대·지역 분포 (수요가 없는 지역이 드러납니다)</li>
+    <li>관심이 모인 사찰</li>
+    <li>사찰 홈페이지 클릭과 전화 걸기 — 지금 구조에서 실제 행동에 가장 가까운 지표입니다</li>
   </ul>
-  <p class="small" style="margin-top:18px">개인을 식별하지 않는 집계값만 보관하고, 원자료 보존기간과 접근권한은 사전에 정해야 합니다.</p>
+  <h3 class="sub" style="margin-top:26px">아직 셀 수 없는 것</h3>
+  <ul style="padding-left:18px;font-size:14px;line-height:1.9;margin:0">
+    <li>사찰별 응답 소요 시간과 미응답 건수 — 사찰과 협의해 수신 절차를 갖춘 뒤에야 셀 수 있습니다</li>
+    <li>출가학교 참가자 중 행자 등록으로 이어진 비율 — 앱 밖에서 일어나는 일입니다</li>
+  </ul>
+  <p class="small" style="margin-top:18px">
+    이름·연락처·조회 코드·상담 질문 내용·IP·정확한 나이는 받지 않습니다. 세션 키는 브라우저 탭을
+    닫으면 사라지므로 방문과 방문 사이가 이어지지 않으며, 쿠키는 쓰지 않습니다. 기록은 180일 뒤 지워집니다.
+    사람 수가 5명 미만인 구간은 재식별을 막기 위해 감춥니다.</p>
 
   <h3 class="sub" style="margin-top:34px">참고할 만한 실제 수치</h3>
   <div class="card">
@@ -276,7 +332,7 @@ footer .links span{cursor:pointer}
   <div style="opacity:.7">연관 사이트 · 대한불교조계종 · 교육원 · 연등회 · 템플스테이</div>
   <div style="margin-top:12px">대한불교조계종 서울 종로구 우정국로 55 한국불교역사문화기념관 3층 · TEL 02-2011-1817</div>
   <div style="opacity:.55;margin-top:8px;font-size:11.5px">
-    시제품 화면입니다. 매칭 결과 전송과 코드 발급은 실제로 동작하지 않습니다.
+    시제품 화면입니다. 사찰에 신청을 대신 전달하는 기능은 넣지 않았으며, 각 사찰에 직접 연락하시는 방식입니다.
     영상은 저작권자가 종단·사찰인 것만 연결하며 영상 파일을 보관하지 않습니다.
     로고·서체·사진은 종단 브랜드 자산이므로 사용 승인을 받아야 합니다.
     <div style="margin-top:6px">출가학교 자료 확인일 · 2026년 9월 8일</div>
@@ -357,64 +413,125 @@ const STEPS=[
    src       근거 (공고·보도). 확인 안 된 항목은 "" 로 두십시오.
    ───────────────────────────────────────────── */
 const SCHOOLS=[
- {temple:"봉녕사",s:"봉녕사",dio:"비구니 도량 · 경기 수원",title:"제7기 여성출가학교",gi:"제7기",days:"9박 10일",who:"17~60세 여성",sex:"female",region:"수도권",dur:"mid",min:17,max:60,lat:37.2915,lon:127.0375,lx:-12,ly:6,anchor:"end",
+ {temple:"봉녕사",s:"봉녕사",dio:"비구니 도량 · 경기 수원",title:"제7기 여성출가학교",gi:"제7기",days:"9박 10일",who:"17~60세 여성 20명",sex:"female",region:"수도권",dur:"mid",min:17,max:60,lat:37.2915,lon:127.0375,lx:-12,ly:6,anchor:"end",
   start:"2027-01-21",end:"2027-01-30",deadline:"",rolling:true,
-  points:["봉녕사 홈페이지에서 상시 접수합니다.","제6기는 7박 8일 「참나를 찾는 요가선명상」으로 진행되었고, 제7기는 9박 10일입니다."],
+  points:["봉녕사 홈페이지 공지에서 선착순으로 접수합니다. 참가비는 60만원으로 보도되었습니다.","슬로건은 「차를 우리고 마음을 바라보다」이며, 차를 우리고 나누는 행다선명상이 집중 프로그램입니다.","제6기는 7박 8일 「참나를 찾는 요가선명상」으로 진행되었고, 제7기는 9박 10일입니다."],
   site:"https://www.bongnyeongsa.org/",tel:"031-256-4127",applyTel:"010-9897-4127",
-  src:"종단 출가 홈페이지 공지 2026.09.08"},
+  src:"종단 출가 홈페이지 공지 2026.09.08 · 현대불교 보도로 2026.09.26 재확인"},
  {temple:"운문사",s:"운문사",dio:"비구니 도량 · 경북 청도",title:"제2기 바라밀 출가학교",gi:"제2기",days:"9박 10일",who:"17~65세 여성 15명",sex:"female",region:"영남",dur:"mid",min:17,max:65,lat:35.6615,lon:128.9603,lx:12,ly:12,
   start:"2026-11-27",end:"2026-12-06",deadline:"2026-11-10",rolling:false,
-  points:["총무원이 주최하고 운문사가 주관합니다. 주제는 「진정한 행복은 지금부터」입니다.","1차 서류 합격자에 한해 2차 면접이 있습니다. 참가비와 제출 서류는 사찰 공고를 확인해 주십시오."],
+  points:["총무원이 주최하고 운문사가 주관합니다. 주제는 「진정한 행복은 지금부터」입니다.","1차 서류 합격자에 한해 2차 면접이 있습니다. 참가비와 제출 서류는 사찰 공고를 확인해 주십시오.","제1기 수료자 가운데 4명이 실제 출가한 것으로 보도되었습니다."],
   site:"http://www.unmunsa.or.kr",tel:"054-372-8800",applyTel:"010-3686-7118",
-  src:"종단 출가 홈페이지 공지 2026.08.26 · 현대불교 2026.09.04"},
+  src:"종단 출가 홈페이지 공지 2026.08.26 · 현대불교 2026.09.04 · 2026.09.26 재확인"},
  {temple:"선운사",s:"선운사",dio:"제24교구본사 · 전북 고창",title:"쉼, 그리고 시작",gi:"제2기 종료",days:"9박 10일",who:"성인 남녀 15명",sex:"all",region:"호남",dur:"mid",min:19,max:99,lat:35.4969,lon:126.5782,lx:-12,ly:4,anchor:"end",
   start:"2026-04-03",end:"2026-04-12",deadline:"",rolling:false,
   points:["총무원이 주최하고 선운사가 주관합니다.","봄·가을 연 2회 운영 계획이 밝혀져 있으나, 가을 기수 일정은 아직 공고되지 않았습니다."],
   site:"http://www.seonunsa.org",tel:"063-561-1422",applyTel:"",
-  src:"불교신문 2026.02.12 · 뉴시스 2026.02.18"},
+  src:"불교신문 2026.02.12 · 뉴시스 2026.02.18 · 2026.09.26 재확인(가을 기수 공고 없음)"},
  {temple:"동화사",s:"동화사",dio:"제9교구본사 · 대구",title:"무문(無門) 단기출가학교",gi:"제1기 종료",days:"9박 10일",who:"17~60세 남녀 각 10명",sex:"all",region:"영남",dur:"mid",min:17,max:60,lat:35.9929,lon:128.7040,lx:12,ly:-4,
   start:"2026-06-19",end:"2026-06-28",deadline:"",rolling:false,
-  points:["예불·발우공양·울력·108배와 함께 요가, 잠자리 명상이 포함됩니다.","접수는 동화사 템플스테이 홈페이지(donghwasa.templestay.com)에서 받았습니다."],
+  points:["예불·발우공양·울력·108배와 함께 요가, 잠자리 명상이 포함됩니다.","제1기는 2026.03.18~06.18 모집해 19명이 참가한 것으로 보도되었습니다.","접수는 동화사 템플스테이 홈페이지(donghwasa.templestay.com)에서 받았습니다.","제2기 개설 여부는 아직 공고되지 않았습니다."],
   site:"http://donghwasa.net/",tel:"053-980-7900",applyTel:"",
-  src:"불교신문 2026.03.19 · 법보신문 2026.03.24"},
- {temple:"오대산 월정사",s:"월정사",dio:"제4교구본사 · 강원 평창",title:"단기출가학교",gi:"",days:"약 1개월",who:"남녀",sex:"all",region:"강원",dur:"long",min:0,max:99,lat:37.7319,lon:128.5929,lx:12,ly:4,
+  src:"불교신문 2026.03.19 · 법보신문 2026.03.24 · 2026.09.26 재확인"},
+ {temple:"오대산 월정사",s:"월정사",dio:"제4교구본사 · 강원 평창",title:"낭만출가학교 제5기",gi:"제5기",days:"6박 7일",who:"남녀 · 연령 요건 확인 필요",sex:"all",region:"강원",dur:"short",min:0,max:99,lat:37.7319,lon:128.5929,lx:12,ly:4,
+  start:"2026-10-19",end:"2026-10-25",deadline:"",rolling:false,
+  points:["※ 이 일정은 웹 검색으로만 확인했고 사찰 공고 원문은 대조하지 못했습니다. 신청 전 월정사로 반드시 확인해 주십시오.","삭발염의하고 외부와 단절된 채 행자생활을 체험합니다.","월정사는 긴 과정도 따로 운영합니다. 제71기 출가학교(20박 21일)는 2026년 7~8월에 진행되었고, 제72기는 2027년 1월 개설 예정으로 확인됩니다.","출가학교는 만 17~65세를 대상으로 하며 40세 이상은 정원의 30% 정도를 선발하고, 졸업 후 정식 출가 희망자를 우선 선발한다고 안내되어 있습니다."],
+  site:"http://www.woljeongsa.org/chulga/",tel:"033-339-6800",applyTel:"033-339-6777",
+  src:"2026.09.26 웹 검색 확인 · 사찰 공고 원문 미대조. 확인 필요"},
+ {temple:"진관사",s:"진관사",dio:"직할교구 · 서울 은평",title:"한걸음, 나를 만나는 길",gi:"제1기 종료",days:"6박 7일",who:"17~59세 여성 15명",sex:"female",region:"수도권",dur:"short",min:17,max:59,lat:37.6384,lon:126.9464,lx:-12,ly:-6,anchor:"end",
+  start:"2026-01-20",end:"2026-01-26",deadline:"",rolling:false,
+  points:["새벽 예불, 108배, 발우공양, 묵언, 오후 불식의 청규를 따릅니다.","제1기는 15명 모집에 11명이 참가했고 참가비는 35만원으로 보도되었습니다.","제2기 개설 여부는 아직 공고되지 않았습니다. 진관사에 확인이 필요합니다."],
+  site:"http://jinkwansa.org",tel:"02-359-8410",applyTel:"",
+  src:"아시아경제·불교닷컴 등 2026.01 보도 · 2026.09.26 웹 확인(원문 미대조)"},
+ {temple:"수덕사",s:"수덕사",dio:"제7교구본사 · 충남 예산",title:"선출가학교",gi:"제2기 접수 마감",days:"9박 10일",who:"17~65세 남녀 각 10명",sex:"all",region:"충청",dur:"mid",min:17,max:65,lat:36.6630,lon:126.6225,lx:-12,ly:4,anchor:"end",
   start:"",end:"",deadline:"",rolling:false,
-  points:["삭발염의하고 외부와 단절된 채 행자생활을 체험합니다.","2026년 모집 공고는 이번 확인에서 찾지 못했습니다. 월정사에 확인이 필요합니다."],
-  site:"http://www.woljeongsa.org/chulga/",tel:"033-339-6800",applyTel:"",src:""},
- {temple:"진관사",s:"진관사",dio:"직할교구 · 서울 은평",title:"한걸음, 나를 만나는 길",gi:"",days:"6박 7일",who:"17~59세 여성 15명",sex:"female",region:"수도권",dur:"short",min:17,max:59,lat:37.6384,lon:126.9464,lx:-12,ly:-6,anchor:"end",
+  points:["주제는 「나를 찾는 열흘간의 출가」입니다.","제2기 접수는 2026.01.30~03.20에 마감되었습니다. 1차 서류 발표 3.23, 면접 뒤 최종 발표 3.26으로 보도되었습니다.","참가비는 40만원이며 고등학생·대학생은 면제된다고 안내되었습니다.","제1기는 남 6명·여 7명 등 13명이 9박 10일간 참가했습니다.","수행 기간의 정확한 날짜와 제3기 개설 여부는 수덕사에 확인이 필요합니다."],
+  site:"http://www.sudeoksa.com/",tel:"041-330-7700",applyTel:"",
+  src:"법보신문 보도 · 2026.09.26 웹 확인(원문 미대조)"},
+ {temple:"조계사",s:"조계사",dio:"직할교구 · 서울 종로",title:"청년·대학생 단기출가",gi:"",days:"5박 6일",who:"청년·대학생",sex:"all",region:"수도권",dur:"short",min:19,max:30,lat:37.5738,lon:126.9822,lx:12,ly:12,
   start:"",end:"",deadline:"",rolling:false,
-  points:["새벽 예불, 108배, 발우공양, 묵언, 오후 불식의 청규를 따릅니다.","2026년 모집 공고는 이번 확인에서 찾지 못했습니다. 진관사에 확인이 필요합니다."],
-  site:"http://jinkwansa.org",tel:"02-359-8410",applyTel:"",src:""},
- {temple:"수덕사",s:"수덕사",dio:"제7교구본사 · 충남 예산",title:"단기출가학교",gi:"",days:"확인 필요",who:"확인 필요",sex:"all",region:"충청",dur:"unknown",min:0,max:99,lat:36.6630,lon:126.6225,lx:-12,ly:4,anchor:"end",
-  start:"",end:"",deadline:"",rolling:false,
-  points:["종단 출가학교 홍보영상에 소개된 사찰입니다.","개별 모집 공고는 수덕사에 확인이 필요합니다."],
-  site:"http://www.sudeoksa.com/",tel:"041-330-7700",applyTel:"",src:""},
- {temple:"조계사",s:"조계사",dio:"직할교구 · 서울 종로",title:"대학생 단기출가",gi:"",days:"확인 필요",who:"대학생",sex:"all",region:"수도권",dur:"unknown",min:19,max:30,lat:37.5738,lon:126.9822,lx:12,ly:12,
-  start:"",end:"",deadline:"",rolling:false,
-  points:["2026년 2월 대학생 단기출가 입재 사례가 보도되었습니다.","다음 기수 개설 여부는 조계사에 확인이 필요합니다."],
-  site:"http://www.jogyesa.kr/",tel:"02-768-8600",applyTel:"",src:"종단 출가 홈페이지 언론보도 2026.02.23"}];
+  points:["2026.02.22 「MZ, 붓다를 만나다」를 주제로 제1차 입재식이 봉행되었고, 5박 6일간 예불·교육·정진·울력을 체험합니다.","남행자 6명·여행자 8명이 발심했다는 보도가 별도로 있으나 시점이 엇갈려, 연간 몇 차례 열리는지는 확인하지 못했습니다.","다음 기수 개설 여부는 조계사에 확인이 필요합니다."],
+  site:"http://www.jogyesa.kr/",tel:"02-768-8600",applyTel:"",
+  src:"종단 출가 홈페이지 언론보도 2026.02.23 · 2026.09.26 웹 확인(원문 미대조)"}];
 
 /* 자료 확인일. 데이터를 손볼 때 이 날짜도 함께 고치십시오. */
-const DATA_DATE="2026-09-08";
+const DATA_DATE="2026-09-26";
 
-const JOURNEY=["관심","상담","출가학교","행자","교육"];
 const FUNNEL=[{l:"앱 방문",v:100},{l:"조건 입력",v:62},{l:"사찰에 전송",v:31},{l:"상담 응답",v:24},{l:"출가학교 참가",v:9},{l:"행자 등록",v:2}];
 const RISK=["죽고","죽을","자살","사라지고","없어지고 싶","살기 싫","끝내고 싶"];
 
 const COAST=[[126.4,37.8],[126.2,37.4],[126.6,37.0],[126.4,36.7],[126.2,36.6],[126.5,36.3],[126.6,35.9],[126.4,35.6],[126.3,35.0],[126.4,34.7],[126.6,34.3],[127.2,34.6],[127.5,34.3],[128.0,34.8],[128.6,34.9],[129.1,35.1],[129.4,35.6],[129.5,36.0],[129.4,36.6],[129.4,37.2],[129.1,37.6],[128.7,38.0],[128.4,38.4],[128.3,38.6],[127.4,38.3],[126.9,38.0],[126.7,37.9]];
 const PXf=lo=>(lo-125.6)*105, PYf=la=>(38.8-la)*105;
 
-let state={view:"home",lang:"ko",sex:"",dur:"",region:"",edu:"",debt:"",filter:"all",sel:-1,chosen:[],code:"",matched:null};
+let state={view:"home",lang:"ko",sex:"",dur:"",region:"",edu:"",debt:"",filter:"all",sel:-1,matched:null};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const $=id=>document.getElementById(id);
+
+/* ─────────────────────────────────────────────
+   익명 퍼널 수집
+   보내는 것: 이벤트 이름, 탭 단위 임의 키, 연령대, 성별, 지역, 기간, 사찰명, 언어
+   보내지 않는 것: 이름, 연락처, 조회 코드, 상담 질문 내용, 정확한 나이
+   세션 키는 sessionStorage 에만 두므로 탭을 닫으면 사라지고
+   방문과 방문 사이가 이어지지 않습니다. 쿠키는 쓰지 않습니다.
+   서버가 수집을 켜지 않았으면 받기만 하고 아무것도 저장하지 않습니다.
+   ───────────────────────────────────────────── */
+const TRACK_ENDPOINT="/api/track";
+function ageBand(n){
+  if(!n||n<10)return null;
+  if(n>=60)return "60대 이상";
+  return (Math.floor(n/10)*10)+"대";
+}
+const Track={
+  key:null, on:true,
+  init(){
+    // 브라우저가 추적 거부를 켜 두었으면 수집하지 않습니다.
+    try{ if(navigator.doNotTrack==="1"||window.doNotTrack==="1"){this.on=false;return;} }catch(e){}
+    try{
+      let k=sessionStorage.getItem("chulga-sk");
+      if(!k||!/^[a-z0-9]{12,24}$/.test(k)){
+        k=(Math.random().toString(36)+Math.random().toString(36)).replace(/[^a-z0-9]/g,"").slice(0,16);
+        while(k.length<12)k+="0";
+        sessionStorage.setItem("chulga-sk",k);
+      }
+      this.key=k;
+    }catch(e){ this.on=false; }   // 저장이 막힌 환경이면 조용히 끕니다
+  },
+  send(e,extra){
+    if(!this.on||!this.key)return;
+    try{
+      const body=JSON.stringify(Object.assign({e:e,sk:this.key,l:state.lang},extra||{}));
+      if(navigator.sendBeacon){
+        navigator.sendBeacon(TRACK_ENDPOINT,new Blob([body],{type:"application/json"}));
+      }else{
+        fetch(TRACK_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:body,keepalive:true}).catch(()=>{});
+      }
+    }catch(e2){}
+  }
+};
 
 function show(v){
   state.view=v;
   ["home","story","guide","school","counsel","stats"].forEach(k=>$("v-"+k).classList.toggle("hidden",k!==v));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
   window.scrollTo({top:0,behavior:"smooth"});
+  const ev={guide:"guide_open",school:"school_open",counsel:"counsel_open"}[v];
+  if(ev)Track.send(ev);
 }
-function setLang(l){state.lang=l;renderForeign();}
+function setLang(l){state.lang=l;renderForeign();syncLangUrl();}
+
+/* ─────────────────────────────────────────────
+   외국인 출가 안내 딥링크
+   ?lang=en 으로 들어오면 출가안내 화면의 영문 안내가 바로 열립니다.
+   해외에서 찾아온 분께 그대로 보낼 수 있는 주소가 됩니다.
+   화면 전체가 번역된 것은 아니므로 <html lang> 은 ko 로 둡니다.
+   ───────────────────────────────────────────── */
+function syncLangUrl(){
+  try{
+    const u=new URL(location.href);
+    if(state.lang==="en") u.searchParams.set("lang","en"); else u.searchParams.delete("lang");
+    history.replaceState(null,"",u.pathname+(u.search||"")+u.hash);
+  }catch(e){}
+}
 
 function pills(el,key,opts,cb){
   $(el).innerHTML=opts.map(o=>`<button data-v="${esc(o.v)}" class="${state[key]===o.v?"on":""}">${esc(o.l)}</button>`).join("");
@@ -447,7 +564,7 @@ function renderForeign(){
   $("foreign").innerHTML=`<p style="margin:0;font-size:14.5px;line-height:1.8">${esc(F.lead)}</p>
    <ul style="margin:14px 0 0;padding-left:18px;font-size:14px;line-height:1.85">${F.items.map(t=>`<li style="margin-bottom:4px">${esc(t)}</li>`).join("")}</ul>
    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--deep)">${esc(F.contact)}</div>`;
-  pills("p-lang","lang",[{v:"ko",l:"국문"},{v:"en",l:"English"}],renderForeign);
+  pills("p-lang","lang",[{v:"ko",l:"국문"},{v:"en",l:"English"}],()=>{renderForeign();syncLangUrl();});
 }
 function renderSteps(){
   $("steps").innerHTML=STEPS.map((s,i)=>`<div class="step ${i===0?"on":""}" data-i="${i}">
@@ -500,7 +617,8 @@ function renderOpen(){
   ["open-home","open-school"].forEach(id=>{
     const el=$(id); if(!el)return; el.innerHTML=h;
     el.querySelectorAll(".openrow").forEach(r=>r.onclick=()=>{
-      const i=+r.dataset.i; state.sel=i; show("school"); renderMap(); renderSchools();
+      const i=+r.dataset.i; state.sel=i; Track.send("school_detail",{t:SCHOOLS[i].temple});
+      show("school"); renderMap(); renderSchools();
       setTimeout(()=>{const t=$("school-"+i); if(t)t.scrollIntoView({behavior:"smooth",block:"center"});},350);
     });
   });
@@ -525,7 +643,8 @@ function renderMap(){
     ${marks}</svg>`;
   $("map").querySelectorAll("g").forEach(g=>g.onclick=()=>{
     const i=+g.dataset.i; if(!matchFilter(SCHOOLS[i]))return;
-    state.sel=i; renderMap(); renderSchools();
+    state.sel=i; Track.send("school_detail",{t:SCHOOLS[i].temple});
+    renderMap(); renderSchools();
     const el=$("school-"+i); if(el)el.scrollIntoView({behavior:"smooth",block:"center"});
   });
 }
@@ -545,18 +664,87 @@ function schoolCard(s,i){
    </div>
    <ul>${s.points.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
    <div class="acts">
-     ${s.site?`<a class="btn sm" href="${esc(s.site)}" target="_blank" rel="noreferrer">사찰 홈페이지에서 신청</a>`:`<span class="dashed">신청 링크 확인 필요</span>`}
-     <a class="tel" href="tel:${esc(s.tel)}">종무소 ${esc(s.tel)}</a></div>
+     ${s.site?`<a class="btn sm" href="${esc(s.site)}" target="_blank" rel="noreferrer" data-tr="apply_click" data-temple="${esc(s.temple)}">사찰 홈페이지에서 신청</a>`:`<span class="dashed">신청 링크 확인 필요</span>`}
+     <a class="tel" href="tel:${esc(s.tel)}" data-tr="tel_click" data-temple="${esc(s.temple)}">종무소 ${esc(s.tel)}</a></div>
    <div class="stamp">${s.src?`근거 · ${esc(s.src)}`:"이번 확인에서 공고를 찾지 못했습니다. 사찰 확인이 필요합니다."}</div></div>`;
 }
 function renderSchools(){
   $("schools").innerHTML=SCHOOLS.map((s,i)=>matchFilter(s)?schoolCard(s,i):"").join("");
 }
-function renderFunnel(){
-  $("funnel").innerHTML=FUNNEL.map((f,i)=>`<div style="margin-bottom:14px">
+/* 퍼널 단계. 이벤트 이름은 api/track.js 의 허용 목록과 같아야 합니다. */
+const FUNNEL_STEPS=[
+ {e:"visit",       l:"앱 방문"},
+ {e:"guide_open",  l:"안내 화면 진입"},
+ {e:"match_run",   l:"조건 입력"},
+ {e:"apply_click", l:"사찰 홈페이지 클릭"},
+ {e:"tel_click",   l:"전화 걸기"}];
+/* 퍼널에 속하지 않는 경로. 따로 셉니다. */
+const SIDE_STEPS=[
+ {e:"school_open",   l:"출가학교 화면"},
+ {e:"school_detail", l:"개별 출가학교 확인"},
+ {e:"counsel_open",  l:"출가상담 화면"},
+ {e:"counsel_ask",   l:"질문 전송"}];
+
+function bars(rows,base){
+  const top=base||Math.max(1,...rows.map(r=>r.v));
+  return rows.map((f,i)=>{
+    const drop=i&&rows[i-1].v>f.v?` <span style="color:var(--warn)">−${rows[i-1].v-f.v}</span>`:"";
+    return `<div style="margin-bottom:14px">
     <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px">
-      <span>${f.l}</span><span style="color:var(--soft)">${f.v}${i?` <span style="color:var(--warn)">−${FUNNEL[i-1].v-f.v}</span>`:""}</span></div>
-    <div class="bar"><i style="width:${f.v}%;background:${i?"var(--gold)":"var(--deep)"}"></i></div></div>`).join("");
+      <span>${esc(f.l)}</span><span style="color:var(--soft)">${f.v}${drop}</span></div>
+    <div class="bar"><i style="width:${Math.round(f.v/top*100)}%;background:${i?"var(--gold)":"var(--deep)"}"></i></div></div>`;
+  }).join("");
+}
+
+function segBlock(title,list){
+  if(!list||!list.length)return "";
+  const top=Math.max(1,...list.map(x=>x.sessions));
+  return `<div class="card" style="margin-bottom:14px">
+    <h3 class="sub" style="margin-top:0">${esc(title)}</h3>
+    ${bars(list.map(x=>({l:x.value,v:x.sessions})),top)}</div>`;
+}
+
+/* d 가 null 이면 예시 수치, 아니면 /api/stats 가 준 실제 집계를 그립니다. */
+function renderFunnel(d){
+  const seg=$("segments");
+  if(!d){
+    $("funnel").innerHTML=bars(FUNNEL.map(f=>({l:f.l,v:f.v})),100);
+    if(seg)seg.innerHTML="";
+    const lead=$("stats-lead");
+    if(lead)lead.textContent="아래 수치는 화면 구성을 보여주기 위한 예시이며 실제 데이터가 아닙니다. 조회 키를 넣으면 실제 집계로 바뀝니다.";
+    return;
+  }
+  const by={};
+  (d.funnel||[]).forEach(r=>{by[r.event]=r.sessions;});
+  const main=FUNNEL_STEPS.map(x=>({l:x.l,v:by[x.e]||0}));
+  const side=SIDE_STEPS.map(x=>({l:x.l,v:by[x.e]||0}));
+  $("funnel").innerHTML=bars(main,Math.max(1,main[0].v))
+    +`<h3 class="sub" style="margin-top:26px">퍼널 밖 경로</h3>`
+    +bars(side,Math.max(1,main[0].v));
+  if(seg){
+    const g=d.segment||{};
+    seg.innerHTML=segBlock("연령대",g.age)+segBlock("희망 지역",g.region)+segBlock("관심이 모인 사찰",g.temple);
+  }
+}
+
+async function loadStats(){
+  const msg=$("stats-msg"), lead=$("stats-lead");
+  const key=$("statskey").value.trim();
+  if(!key){msg.textContent="조회 키를 넣어 주십시오.";return;}
+  msg.textContent="불러오는 중…";
+  try{
+    const r=await fetch("/api/stats?key="+encodeURIComponent(key));
+    const d=await r.json();
+    if(!d.configured){ msg.textContent="수집이 아직 설정되지 않았습니다. 아래는 예시 수치입니다."; renderFunnel(null); return; }
+    if(d.error){ msg.textContent=d.error; renderFunnel(null); return; }
+    try{ sessionStorage.setItem("chulga-statskey",key); }catch(e){}
+    renderFunnel(d);
+    if(lead)lead.textContent="실제 집계입니다. 개별 기록은 내려받을 수 없고 집계값만 나옵니다.";
+    msg.textContent=`${d.window} 기준. 사람 수가 ${d.minCell}명 미만인 구간은 재식별을 막기 위해 감춥니다.`;
+  }catch(e){
+    msg.textContent="집계를 가져오지 못했습니다. 잠시 뒤 다시 시도해 주십시오.";
+    renderFunnel(null);
+  }
 }
 
 function runMatch(){
@@ -579,7 +767,8 @@ function runMatch(){
     else{sc-=1;why.push("다음 기수 일정이 아직 공고되지 않았습니다");}
     return Object.assign({},s,{sc:sc,why:why});
   }).sort((a,b)=>b.sc-a.sc);
-  state.matched={p:PATHS[key],flags:flags,list:list}; state.chosen=[]; state.code="";
+  Track.send("match_run",{a:ageBand(n),s:state.sex||null,r:state.region||null,d:state.dur||null});
+  state.matched={p:PATHS[key],flags:flags,list:list};
   renderMatch();
 }
 function renderMatch(){
@@ -591,42 +780,28 @@ function renderMatch(){
     <ul style="margin:12px 0 0;padding-left:18px;line-height:1.8;font-size:14px">${p.notes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
     ${m.flags.length?`<div class="flag">${m.flags.map(f=>`<div>${esc(f)}</div>`).join("")}</div>`:""}</div>
    <h3 class="sub">지금 알아보실 만한 곳</h3>
-   <p class="small" style="margin:0 0 16px">조건에 가까운 순서입니다. <b style="color:var(--ink)">고르신 곳에만</b> 조건이 전달되며, 이름과 연락처는 보내지 않습니다.</p>`;
-  h+=m.list.map(s=>{
-    const on=state.chosen.indexOf(s.temple)>=0;
-    return `<div class="pickrow ${on?"on":""}" data-t="${esc(s.temple)}">
-      <div class="box">${on?"✓":""}</div>
-      <div style="flex:1">
-        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
-          <span style="font-family:var(--serif);font-size:16.5px">${esc(s.temple)}</span>
-          <span style="font-size:12.5px;color:var(--soft)">${esc(s.region)} · ${esc(s.days)}</span></div>
-        <div style="font-size:13px;color:var(--gold);margin-top:4px;font-family:var(--serif)">${esc(s.title)}</div>
-        ${s.why.length?`<div style="font-size:12.5px;color:var(--soft);margin-top:7px;line-height:1.7">${esc(s.why.join(" · "))}</div>`:""}
-      </div></div>`;}).join("");
-  h+=`<div class="card" style="margin-top:16px">`;
-  if(!state.code){
-    h+=`<div class="small" style="margin-bottom:14px">보내는 내용은 성별, 나이, 가능한 기간, 지역뿐입니다. 이후 연락은 발급받으신 코드로 이 앱 안에서만 이루어집니다.</div>
-      <button class="btn" id="sendbtn" ${state.chosen.length?"":"disabled"}>고른 ${state.chosen.length}곳에 보내기</button>`;
-  }else{
-    h+=`<div style="font-family:var(--serif);font-size:17px;color:var(--deep);margin-bottom:8px">보냈습니다</div>
-      <div style="font-size:14px;line-height:1.8">조회 코드 <b style="font-family:var(--serif);font-size:18px;letter-spacing:.06em">${esc(state.code)}</b>
-      <div class="small" style="margin-top:6px">이 코드를 적어두시면 답이 왔는지 확인하실 수 있습니다. 이름을 남기지 않으셨으므로 코드를 잃으면 조회가 어렵습니다.</div></div>
-      <div class="journey">${JOURNEY.map((j,i)=>`<div class="${i===0?"now":""}">${j}</div>`).join("")}</div>
-      <div class="small" style="margin-top:10px">시제품이므로 실제로 전송되지는 않습니다.</div>`;
-  }
-  h+=`</div>`;
+   <p class="small" style="margin:0 0 16px">조건에 가까운 순서입니다. 마음이 가시는 곳에 <b style="color:var(--ink)">직접 연락해 보십시오.</b>
+     이 화면은 어디에도 아무것도 보내지 않으며, 입력하신 내용은 기기 밖으로 나가지 않습니다.</p>`;
+  h+=m.list.map(s=>`<div class="reco">
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
+        <span style="font-family:var(--serif);font-size:16.5px">${esc(s.temple)}</span>
+        <span style="font-size:12.5px;color:var(--soft)">${esc(s.region)} · ${esc(s.days)}</span></div>
+      <div style="font-size:13px;color:var(--gold);margin-top:4px;font-family:var(--serif)">${esc(s.title)}</div>
+      ${s.why.length?`<div style="font-size:12.5px;color:var(--soft);margin-top:7px;line-height:1.7">${esc(s.why.join(" · "))}</div>`:""}
+      <div class="acts" style="margin-top:12px">
+        ${s.site?`<a class="btn sm" href="${esc(s.site)}" target="_blank" rel="noreferrer" data-tr="apply_click" data-temple="${esc(s.temple)}">사찰 홈페이지</a>`:""}
+        <a class="tel" href="tel:${esc(s.tel)}" data-tr="tel_click" data-temple="${esc(s.temple)}">종무소 ${esc(s.tel)}</a>
+        ${s.applyTel?`<a class="tel" href="tel:${esc(s.applyTel)}" data-tr="tel_click" data-temple="${esc(s.temple)}">모집문의 ${esc(s.applyTel)}</a>`:""}
+      </div></div>`).join("");
+  h+=`<div class="card" style="margin-top:16px">
+    <div style="font-family:var(--serif);font-size:16px;color:var(--deep);margin-bottom:8px">어디에 물어야 할지 모르시겠다면</div>
+    <div style="font-size:14px;line-height:1.85">출가상담전화 <b>1666-7987</b>(09:00~18:00)로 전화하시면 출가상담사 스님과 이야기하실 수 있습니다.
+      절차에 관한 것은 조계종 교육부 <b>02-2011-1817</b>로 문의하십시오.</div>
+    <div class="acts" style="margin-top:12px">
+      <a class="tel" href="tel:1666-7987" data-tr="tel_click" data-temple="출가상담전화">출가상담 1666-7987</a>
+      <a class="tel" href="tel:02-2011-1817" data-tr="tel_click" data-temple="교육부">교육부 02-2011-1817</a>
+    </div></div>`;
   $("match-out").innerHTML=h;
-  $("match-out").querySelectorAll(".pickrow").forEach(r=>r.onclick=()=>{
-    const t=r.dataset.t,i=state.chosen.indexOf(t);
-    if(i>=0)state.chosen.splice(i,1);else state.chosen.push(t);
-    renderMatch();
-  });
-  const sb=$("sendbtn");
-  if(sb)sb.onclick=()=>{
-    const cs="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let r="";
-    for(let i=0;i<5;i++)r+=cs[Math.floor(Math.random()*cs.length)];
-    state.code="출가-"+r; renderMatch();
-  };
 }
 
 function exportData(){
@@ -674,6 +849,7 @@ async function ask(){
       조계종 교육부 <b>02-2011-1817</b>로 문의해 주십시오.</div>`;
     return;
   }
+  Track.send("counsel_ask");   // 질문 내용은 보내지 않습니다. 물었다는 사실만 셉니다.
   const btn=$("askbtn"); btn.disabled=true; btn.textContent="답을 찾는 중";
   out.innerHTML="";
   try{
@@ -694,7 +870,25 @@ pills("p-region","region",[{v:"수도권",l:"수도권"},{v:"충청",l:"충청"}
 pills("p-edu","edu",[{v:"yes",l:"있습니다"},{v:"no",l:"없습니다"}]);
 pills("p-debt","debt",[{v:"no",l:"없습니다"},{v:"yes",l:"있습니다"}]);
 pills("p-filter","filter",[{v:"all",l:"전체"},{v:"male",l:"남성 참여 가능"},{v:"female",l:"여성 참여 가능"}],()=>{state.sel=-1;renderMap();renderSchools();});
-renderLists(); renderVideos(); renderForeign(); renderSteps(); renderMap(); renderSchools(); renderOpen(); renderFunnel(); show("home");
+Track.init();
+/* 신청 링크·전화 버튼은 다시 그려지므로 문서에 한 번만 걸어 둡니다. */
+document.addEventListener("click",ev=>{
+  const el=ev.target&&ev.target.closest?ev.target.closest("[data-tr]"):null;
+  if(el)Track.send(el.dataset.tr,{t:el.dataset.temple||null});
+},true);
+try{ const sk=sessionStorage.getItem("chulga-statskey"); if(sk)$("statskey").value=sk; }catch(e){}
+
+renderLists(); renderVideos(); renderForeign(); renderSteps(); renderMap(); renderSchools(); renderOpen(); renderFunnel(null); show("home");
+Track.send("visit");
+
+/* 주소로 들어온 경우 — ?lang=en */
+(function fromQuery(){
+  const q=new URLSearchParams(location.search);
+  if(q.get("lang")==="en"){
+    state.lang="en"; renderForeign(); show("guide");
+    setTimeout(()=>{const el=$("f-title"); if(el)el.scrollIntoView({behavior:"smooth",block:"start"});},420);
+  }
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 화면이 하나뿐인 앱이므로 주소도 하나입니다.
+     화면을 주소로 나누게 되면 <url> 항목을 늘리고 lastmod 를 함께 고치십시오. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://chulga-platform1.vercel.app/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
