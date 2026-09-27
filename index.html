@@ -59,9 +59,6 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6}
 .wrap{max-width:900px;margin:0 auto;padding:0 20px}
-.topbar{background:var(--bar);color:#fff}
-.topbar .wrap{display:flex;justify-content:flex-end;gap:16px;padding:8px 20px;font-size:12.5px;opacity:.85}
-.topbar span{cursor:pointer}
 header{background:#fff;border-bottom:1px solid var(--line)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;flex-wrap:wrap}
 .logo{cursor:pointer;line-height:1.3}
@@ -87,7 +84,13 @@ p.lead{margin:0 0 22px;color:var(--soft);font-size:14px;line-height:1.75;max-wid
 .cols{display:flex;gap:32px;flex-wrap:wrap}
 .col{flex:1 1 300px;min-width:260px}
 .colhead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--deep);padding-bottom:8px;margin-bottom:12px;font-family:var(--serif);font-size:17px}
-.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+a.row{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px;
+  color:inherit;text-decoration:none;cursor:pointer}
+a.row:hover .t,a.row:focus-visible .t{color:var(--deep);text-decoration:underline}
+a.row:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.colhead .more{font-family:var(--sans);font-size:12.5px;color:var(--soft);text-decoration:none}
+.colhead .more:hover{color:var(--deep);text-decoration:underline}
+.boardnote{font-size:11.5px;color:var(--soft);margin:10px 0 0}
 .row .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .d{color:var(--soft);flex-shrink:0;font-size:12.5px}
 label.f{display:block;font-size:13.5px;color:var(--soft);margin-bottom:8px}
@@ -134,6 +137,7 @@ footer{background:var(--bar);color:#fff;margin-top:20px}
 footer .wrap{padding:26px 20px 30px;font-size:12.5px;line-height:1.9;opacity:.85}
 footer .links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
 footer .links span{cursor:pointer}
+footer a{color:#C9D4DA;text-decoration:underline;text-underline-offset:2px}
 .hidden{display:none}
 .tag{font-size:11.5px;color:var(--soft);border:1px solid var(--line);padding:3px 8px;border-radius:2px}
 .badge{font-size:11.5px;padding:3px 9px;border-radius:2px;border:1px solid var(--line);color:var(--soft);white-space:nowrap}
@@ -157,7 +161,6 @@ footer .links span{cursor:pointer}
 </head>
 <body>
 
-<div class="topbar"><div class="wrap"><span>행자용 로그인</span><span>검색</span></div></div>
 
 <header><div class="wrap">
   <div class="logo" onclick="show('home')">
@@ -365,10 +368,15 @@ footer .links span{cursor:pointer}
 
 <footer><div class="wrap">
   <div class="links">
-    <span>개인정보처리방침</span><span>이용약관</span><span>영상 저작권 안내</span>
     <span style="text-decoration:underline" onclick="show('stats')">운영자 통계(시제품)</span>
   </div>
-  <div style="opacity:.7">연관 사이트 · 대한불교조계종 · 교육원 · 연등회 · 템플스테이</div>
+  <div style="opacity:.85;margin-bottom:12px">연관 사이트 ·
+    <a href="http://monk.buddhism.or.kr/" target="_blank" rel="noreferrer">종단 출가 홈페이지</a> ·
+    <a href="https://www.buddhism.or.kr/" target="_blank" rel="noreferrer">대한불교조계종</a> ·
+    <a href="http://monkedu.buddhism.or.kr/" target="_blank" rel="noreferrer">조계종 교육부</a> ·
+    <a href="http://www.llf.or.kr/" target="_blank" rel="noreferrer">연등회</a> ·
+    <a href="https://www.templestay.com/" target="_blank" rel="noreferrer">템플스테이</a></div>
+  <div style="opacity:.7">이 화면은 개인정보를 수집하지 않습니다. 상담 접수를 여는 때에 개인정보처리방침과 이용약관을 게시합니다.</div>
   <div style="margin-top:12px">대한불교조계종 서울 종로구 우정국로 55 한국불교역사문화기념관 3층 · TEL 02-2011-1817</div>
   <div style="opacity:.55;margin-top:8px;font-size:11.5px">
     시제품 화면입니다. 사찰에 신청을 대신 전달하는 기능은 넣지 않았으며, 각 사찰에 직접 연락하시는 방식입니다.
@@ -387,18 +395,29 @@ footer .links span{cursor:pointer}
 
 const NAV=[{id:"story",label:"출가이야기"},{id:"guide",label:"출가안내"},{id:"school",label:"출가학교"},{id:"counsel",label:"출가상담"}];
 
+/* ─────────────────────────────────────────────
+   공지사항과 언론보도
+   여기 적힌 것은 종단 출가 홈페이지 게시판을 옮겨 적은 것입니다.
+   제목을 누르면 그 게시판으로 갑니다.
+   ▸ 개별 글 주소를 아시면 u 항목에 넣어 주십시오. 그러면 그 글로 바로
+     갑니다. 비워 두면 게시판 목록으로 갑니다.
+     예) {t:"...",d:"2026.09.08",u:"http://monk.buddhism.or.kr/bbs/board.php?bo_table=1010&wr_id=27"}
+   ───────────────────────────────────────────── */
+const BOARD={
+  notice:"http://monk.buddhism.or.kr/bbs/board.php?bo_table=1010",
+  press: "http://monk.buddhism.or.kr/bbs/board.php?bo_table=1030"};
 const NOTICES=[
- {t:"제7기 봉녕사 여성출가학교 모집 안내",d:"2026.09.08"},
- {t:"제2기 운문사 바라밀 출가학교 모집 안내",d:"2026.08.26"},
- {t:"KBS1 TV 다큐 ON 「나를 만나는 시간, 우리들의 출가학교」 방영",d:"2026.07.30"},
- {t:"2026 대한민국불교문화엑스포 출가상담 부스",d:"2026.06.09"},
- {t:"2026년 연등회 전통문화마당 출가상담부스 안내",d:"2026.05.14"}];
+ {t:"제7기 봉녕사 여성출가학교 모집 안내",d:"2026.09.08",u:""},
+ {t:"제2기 운문사 바라밀 출가학교 모집 안내",d:"2026.08.26",u:""},
+ {t:"KBS1 TV 다큐 ON 「나를 만나는 시간, 우리들의 출가학교」 방영",d:"2026.07.30",u:""},
+ {t:"2026 대한민국불교문화엑스포 출가상담 부스",d:"2026.06.09",u:""},
+ {t:"2026년 연등회 전통문화마당 출가상담부스 안내",d:"2026.05.14",u:""}];
 const PRESS=[
- {t:"청도 운문사, 「제2기 바라밀 출가학교」 참가자 모집",d:"2026.09.01"},
- {t:"봉녕사 제6기 여성출가학교 입재…7박 8일 참나 찾는 수행길",d:"2026.08.04"},
- {t:"대구 동화사 「단기출가」, 고불식으로 여정 시작",d:"2026.06.26"},
- {t:"[100세시대 현장의 불자들] 4. 은퇴출가자",d:"2026.05.20"},
- {t:"호국사찰 동화사, 제1기 무문(無門) 단기출가학교 모집",d:"2026.03.23"}];
+ {t:"청도 운문사, 「제2기 바라밀 출가학교」 참가자 모집",d:"2026.09.01",u:""},
+ {t:"봉녕사 제6기 여성출가학교 입재…7박 8일 참나 찾는 수행길",d:"2026.08.04",u:""},
+ {t:"대구 동화사 「단기출가」, 고불식으로 여정 시작",d:"2026.06.26",u:""},
+ {t:"[100세시대 현장의 불자들] 4. 은퇴출가자",d:"2026.05.20",u:""},
+ {t:"호국사찰 동화사, 제1기 무문(無門) 단기출가학교 모집",d:"2026.03.23",u:""}];
 
 /* owner 종단·사찰만 embeddable. youtubeId를 채우면 앱 안에서 재생됩니다.
    사찰 제작 영상은 해당 사찰 동의를 받은 뒤 embeddable을 true로 바꾸십시오. */
@@ -573,12 +592,15 @@ function pills(el,key,opts,cb){
   $(el).querySelectorAll("button").forEach(b=>b.onclick=()=>{state[key]=b.dataset.v;pills(el,key,opts,cb);if(cb)cb();});
 }
 
-function listCol(title,items){
-  return `<div class="col"><div class="colhead"><span>${title}</span><span style="color:var(--soft)">＋</span></div>`+
-   items.map(n=>`<div class="row"><span class="t">${esc(n.t)}</span><span class="d">${n.d}</span></div>`).join("")+`</div>`;
+function listCol(title,items,board){
+  return `<div class="col"><div class="colhead"><span>${esc(title)}</span>`+
+   `<a class="more" href="${esc(board)}" target="_blank" rel="noreferrer">전체 보기 ＋</a></div>`+
+   items.map(n=>`<a class="row" href="${esc(n.u||board)}" target="_blank" rel="noreferrer">`+
+     `<span class="t">${esc(n.t)}</span><span class="d">${esc(n.d)}</span></a>`).join("")+
+   `<p class="boardnote">종단 출가 홈페이지의 글입니다. 누르면 그곳에서 열립니다.</p></div>`;
 }
 function renderLists(){
-  const html=listCol("공지사항",NOTICES)+listCol("언론에 비친 출가",PRESS);
+  const html=listCol("공지사항",NOTICES,BOARD.notice)+listCol("언론에 비친 출가",PRESS,BOARD.press);
   $("home-lists").innerHTML=html; $("story-lists").innerHTML=html;
 }
 function renderVideos(){
